@@ -8,6 +8,7 @@ int lerInteiro(char mensagem[MAXSTRING], int minimo, int maximo);
 float lerFloat(char mensagem[MAXSTRING], float minimo, float maximo);
 void lerString(char mensagem[MAXSTRING], char vetorCaracteres[MAXSTRING], int maximoCaracteres);
 void limpaBufferStdin(void);
+tipoData lerData(void);
 //menus
 int menuPrincipal(int contBicicletas, int contEmprestimo, int contEspera, int contUtente, int bicicletasOcupadas);
 char menuBicicleta(int contBicicletas);
@@ -17,11 +18,15 @@ void inserirBicicleta(tipoBicicleta bicicletas[],int *contBicicletas);
 void consultarBicicleta(tipoBicicleta bicicletas[],int contBicicletas);
 void listarBicicletas(tipoBicicleta bicicletas[],int contBicicletas);
 int procurarBicicleta(tipoBicicleta bicicletas[],char designacao[],int contBicicletas);
+//emprestimos
+tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int *contEmprestimo,int *idEmprestimo,int *bicicletasOcupadas);
 //ficheiro
 void lerFicheiroBinBicicleta(tipoBicicleta bicicleta[MAXBICICLETA], int *contBicicletas);
 void escreverFicheiroBinBicicleta(tipoBicicleta bicicleta[MAXBICICLETA], int contBicicletas);
 void lerFicheiroBinUtente(tipoUtente utente[MAXUTENTE], int *contUtente);
 void escreverFicheiroBinUtente(tipoUtente utente[MAXUTENTE], int contUtente);
+void lerFicheiroBinEmprestimo(tipoEmprestimo emprestimo[], int *contEmprestimo);
+void escreverFicheiroBinEmprestimo(tipoEmprestimo emprestimo[], int contEmprestimo);
 //utentes
 void inserirUtente(tipoUtente Utente[],int *contUtente);
 int procurarUtente(tipoUtente Utente[],int codigo,int contUtente);

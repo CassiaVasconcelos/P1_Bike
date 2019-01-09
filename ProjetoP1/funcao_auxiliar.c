@@ -97,12 +97,12 @@ void lerString(char mensagem[MAXSTRING], char vetorCaracteres[MAXSTRING], int ma
 }
 
 
-/*tipoData lerData(void)
+tipoData lerData(void)
 {
     tipoData data;
     int maxDiasMes;
 
-    data.ano = lerInteiro(" ano", 2014, 2018);
+    data.ano = lerInteiro(" ano", 2010, 2025);
     data.mes = lerInteiro(" mes", 1, 12);
 
     switch (data.mes)
@@ -129,10 +129,12 @@ void lerString(char mensagem[MAXSTRING], char vetorCaracteres[MAXSTRING], int ma
 
     data.dia = lerInteiro(" dia:", 1, maxDiasMes);
 
+    data.hora = lerInteiro("hora:",MIN,MAXHORAS);
+    data.minuto = lerInteiro("minutos:",MIN,MAXMINUTOS);
 
     return data;
 }
-*/
+
 void limpaBufferStdin(void)
 {
     char chr;

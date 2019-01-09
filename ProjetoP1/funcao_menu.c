@@ -74,3 +74,25 @@ char menuUtente(int contUtente){
 
     return opcao;
 }
+
+char menuEmprestimo(int bicicletasOcupadas){
+    int bicicletasDisponiveis = MAXBICICLETA - bicicletasOcupadas;
+    char opcoes[] = "RDCLV";
+    char opcao;
+
+    do{
+        printf("\nNumero de bicicletas disponiveis:%i", bicicletasDisponiveis);
+        printf("\n\n     (R)egistar\n");
+        printf("     (D)evolucao\n");
+        printf("     (C)onsultar\n");
+        printf("     (L)istar\n");
+        printf("     (V)oltar\n");
+        printf("      Escolha uma opcao: ");
+        scanf(" %c", &opcao);
+        opcao = toupper(opcao);
+
+    }
+    while (strchr(opcoes, opcao)==NULL);
+
+    return opcao;
+}

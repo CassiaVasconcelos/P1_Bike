@@ -9,80 +9,108 @@
 #include "constantes.h"
 #include "estruturas.h"
 
+
 int main()
 {
     int opcao,contBicicletas=0,contEmprestimo=0,contEspera=0,contUtente=0,bicicletasOcupadas=0;
-    char opcaoBicicleta,opcUtente;
+    int idEmprestimo = 1;
+    char opcaoBicicleta,opcUtente,opcEmprestimo;
 
     tipoBicicleta bicicleta[MAXBICICLETA];
     tipoUtente utente[MAXUTENTE];
+    tipoEmprestimo *emprestimo;
+
+    emprestimo=NULL;
 
     lerFicheiroBinBicicleta(bicicleta,&contBicicletas);
     lerFicheiroBinUtente(utente,&contUtente);
+    lerFicheiroBinEmprestimo(emprestimo,&contEmprestimo);
 
     do
     {
         opcao = menuPrincipal(contBicicletas, contEmprestimo, contEspera, contUtente, bicicletasOcupadas);
         switch(opcao)
         {
-            case 1:
-                opcaoBicicleta = menuBicicleta(contBicicletas);
-                switch(opcaoBicicleta)
+        case 1:
+            opcaoBicicleta = menuBicicleta(contBicicletas);
+            switch(opcaoBicicleta)
+            {
+            case 'I':
+                if(contBicicletas == MAXBICICLETA)
                 {
-                case 'I':
-                    if(contBicicletas == MAXBICICLETA){
-                            printf("\nJa atingiu o numero maximo de bicicletas");
-                        }else{
-                            inserirBicicleta(bicicleta,&contBicicletas);
-                        }
-                break;
-                case 'C':
-                    consultarBicicleta(bicicleta,contBicicletas);
-                break;
-                case 'L':
-                    listarBicicletas(bicicleta,contBicicletas);
-                break;
-                case 'R':
-                break;
+                    printf("\nJa atingiu o numero maximo de bicicletas");
                 }
-            break;
-            case 2:
-                opcUtente = menuUtente(contUtente);
-                switch(opcUtente)
+                else
                 {
-                case 'I':
-                    if(contUtente == MAXUTENTE){
-                            printf("\nJa atingiu o numero maximo de utentes");
-                        }else{
-                            inserirUtente(utente,&contUtente);
-                        }
-                break;
-                case 'C':
-                    consultarUtente(utente,contUtente);
-                break;
-                case 'L':
-                    listarUtente(utente,contUtente);
-                break;
-                case 'A':
-                    alterarUtente(utente,contUtente);
-                break;
+                    inserirBicicleta(bicicleta,&contBicicletas);
                 }
+                break;
+            case 'C':
+                consultarBicicleta(bicicleta,contBicicletas);
+                break;
+            case 'L':
+                listarBicicletas(bicicleta,contBicicletas);
+                break;
+            case 'R':
+                break;
+            }
             break;
-            case 3:
+        case 2:
+            opcUtente = menuUtente(contUtente);
+            switch(opcUtente)
+            {
+            case 'I':
+                if(contUtente == MAXUTENTE)
+                {
+                    printf("\nJa atingiu o numero maximo de utentes");
+                }
+                else
+                {
+                    inserirUtente(utente,&contUtente);
+                }
+                break;
+            case 'C':
+                consultarUtente(utente,contUtente);
+                break;
+            case 'L':
+                listarUtente(utente,contUtente);
+                break;
+            case 'A':
+                alterarUtente(utente,contUtente);
+                break;
+            }
             break;
-            case 4:
+        case 3:
             break;
-            case 5:
+        case 4:
+            opcEmprestimo = menuEmprestimo(bicicletasOcupadas);
+            switch(opcEmprestimo)
+            {
+            case 'R':
+                emprestimo = registarEmprestimo(bicicleta,utente,emprestimo,contBicicletas,contUtente,&contEmprestimo,&idEmprestimo,&bicicletasOcupadas);
+                break;
+            case 'D':
+                break;
+            case 'C':
+                break;
+            case 'L':
+                break;
+            }
             break;
-            case 6:
+        case 5:
             break;
-            case 7:
+        case 6:
+            break;
+        case 7:
             break;
         }
-    }while(opcao!=8);
+    }
+    while(opcao!=8);
 
     escreverFicheiroBinBicicleta(bicicleta,contBicicletas);//salvar
     escreverFicheiroBinUtente(utente,contUtente);//salvar
+    escreverFicheiroBinEmprestimo(emprestimo,contEmprestimo);
+    free(emprestimo);
 
     return 0;
 }

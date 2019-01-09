@@ -5,6 +5,14 @@
 #include "declaracoes_funcoes.h"
 
 typedef struct{
+	int dia;
+	int mes;
+	int ano;
+	int hora;
+	int minuto;
+}tipoData;
+
+typedef struct{
     char designacao[MAXSTRING];///ID inserido pelo usuario
     char modelo[MAXSTRING];
     char estado[MAXESTADO];  ///disponivel, emprestada, avariada
@@ -22,5 +30,16 @@ typedef struct{
     int quantidadeEmprestimos;
     float distanciaPercorrida;
 }tipoUtente;
+
+typedef struct{
+    int numeroRegisto;
+    int codigoUtente;
+    char designacaoBicicleta[MAXSTRING];
+    tipoData dataEmprestimo;
+    char campusOrigem[MAXSTRING];
+    char campusDestino[MAXSTRING];
+    tipoData dataDevolucao;
+    int distanciaPercorrida;
+}tipoEmprestimo;
 
 #endif // ESTRUTURAS_H_INCLUDED

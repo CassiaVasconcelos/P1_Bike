@@ -79,7 +79,7 @@
 	"constantes.h"
 	"estruturas.h"
 
-1546986878 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\funcao_auxiliar.c
+1547069667 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\funcao_auxiliar.c
 	<stdio.h>
 	<string.h>
 	<ctype.h>
@@ -90,13 +90,13 @@
 	"constantes.h"
 	"estruturas.h"
 
-1546992480 c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\declaracoes_funcoes.h
+1547071791 c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\declaracoes_funcoes.h
 	"constantes.h"
 	"estruturas.h"
 
 1546992508 c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\constantes.h
 
-1546988825 c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\estruturas.h
+1547066128 c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\estruturas.h
 	"constantes.h"
 	"declaracoes_funcoes.h"
 
@@ -111,7 +111,7 @@
 	"constantes.h"
 	"estruturas.h"
 
-1546991970 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\funcao_ficheiro.c
+1547071911 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\funcao_ficheiro.c
 	<string.h>
 	<ctype.h>
 	<limits.h>
@@ -122,7 +122,7 @@
 	"constantes.h"
 	"estruturas.h"
 
-1546993907 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\funcao_menu.c
+1547066091 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\funcao_menu.c
 	<stdio.h>
 	<string.h>
 	<ctype.h>
@@ -144,7 +144,18 @@
 	"constantes.h"
 	"estruturas.h"
 
-1546995648 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\main.c
+1547072075 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\main.c
+	<stdio.h>
+	<string.h>
+	<ctype.h>
+	<limits.h>
+	<stdlib.h>
+	<time.h>
+	"declaracoes_funcoes.h"
+	"constantes.h"
+	"estruturas.h"
+
+1547070821 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\funcao_emprestimo.c
 	<stdio.h>
 	<string.h>
 	<ctype.h>
