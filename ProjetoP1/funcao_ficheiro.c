@@ -108,7 +108,8 @@ tipoEmprestimo *lerFicheiroBinEmprestimo(tipoEmprestimo emprestimo[], int *contE
         }
         else
         {
-            fread(emprestimo,sizeof(tipoEmprestimo),*contEmprestimo,ficheiro);
+            fread(aux,sizeof(tipoEmprestimo),*contEmprestimo,ficheiro); //add
+           // fread(emprestimo,sizeof(tipoEmprestimo),contEmprestimo,ficheiro);
         }
 
     }

@@ -17,7 +17,8 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
     char campus[MAXSTRING];
     int codigo;
     tipoEmprestimo *aux;
-    int emprestimoRealizado=0;
+    aux = emprestimos;  ///add
+    int emprestimoRealizado=0,naoDisponivel=0;
 
     codigo = lerInteiro("\nIntroduza o numero de utente:",0,MAXNUMEROUTENTE);
 
@@ -33,13 +34,11 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
 
         for(i=0; i<*contEmprestimo; ++i)    //verificar se ja possui emprestimo
         {
-            printf("teste2:%d",emprestimos[i].codigoUtente);
+          //  printf("teste2:%d",emprestimos[i].codigoUtente);
             if(emprestimos[i].dataDevolucao.dia == 0 && utentes[pos].numero == emprestimos[i].codigoUtente)
             {
-                //printf("teste2");
                 emprestimoRealizado=1;
-                break;
-
+                //break;
             }
         }
 
@@ -49,12 +48,7 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
         }
         else
         {
-            printf("\n\nInsira o campus onde deseja efectuar o emprestimo:");
-            printf("\n1->Residencias");
-            printf("\n2->Campus 1");
-            printf("\n3->Campus 2");
-            printf("\n4->Campus 5");
-            opcao = lerInteiro("\nEscolhe uma opcao: ",1,4);
+            opcao = menuCampus();
 
             switch(opcao)
             {
@@ -74,10 +68,13 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
 
             for(i=0; i<contBicicleta; ++i)
             {
+
                 if(strcmp(bicicleta[i].campus,campus)==0)
                 {
+
                     if(strcmp(bicicleta[i].estado,"disponivel")==0)  //ve se tem alguma bike disponivel naquele campus
                     {
+
                         aux = realloc(aux,(*contEmprestimo+1)*sizeof(tipoEmprestimo));
 
                         if(aux == NULL)
@@ -92,12 +89,7 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
                             aux[*contEmprestimo].dataEmprestimo = lerData();
                             strcpy(aux[*contEmprestimo].campusOrigem,campus);
 
-                            printf("\n\nInsira o campus de destino:");
-                            printf("\n1->Residencias");
-                            printf("\n2->Campus 1");
-                            printf("\n3->Campus 2");
-                            printf("\n4->Campus 5");
-                            opcao = lerInteiro("\nEscolhe uma opcao: ",1,4);
+                            opcao = menuCampus();
 
                             switch(opcao)
                             {
@@ -136,11 +128,15 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
                         //int distanciaPercorrida;
 
 
+                    } else {
+                        naoDisponivel=1;
                     }
-
                 }
             }
 
+            if(naoDisponivel==1){
+                printf("\nNao ha bicicletas disponiveis.");
+            }
         }
     }
 
@@ -148,7 +144,7 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
     return aux;//para atualizar a memoria dinamica
 }
 
-void consultarEmprestimo(tipoBicicleta bicicletas[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo)
+void consultarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo)
 {
     int numeroUtente;
     int pos = -1;
@@ -171,11 +167,11 @@ void consultarEmprestimo(tipoBicicleta bicicletas[],tipoUtente utentes[],tipoEmp
                 printf("\nDesignacao da bicicleta:%s",emprestimos[i].designacaoBicicleta);
                 printf("\nCampus Origem:%s",emprestimos[i].campusOrigem);
                 printf("\nCampus destino:%s",emprestimos[i].campusDestino);
-                printf("\nData de emprestimo:%d-%d-%d\t\t%d:%d",emprestimos[i].dataEmprestimo.dia,emprestimos[i].dataEmprestimo.mes,emprestimos[i].dataEmprestimo.ano,
+                printf("\nData de emprestimo:%02d-%02d-%04d\t\t%02d:%02d",emprestimos[i].dataEmprestimo.dia,emprestimos[i].dataEmprestimo.mes,emprestimos[i].dataEmprestimo.ano,
                        emprestimos[i].dataEmprestimo.hora,emprestimos[i].dataEmprestimo.minuto);
-                printf("\nData de devolucao:%d-%d-%d\t\t%d:%d",emprestimos[i].dataDevolucao.dia,emprestimos[i].dataDevolucao.mes,emprestimos[i].dataDevolucao.ano,
+                printf("\nData de devolucao:%02d-%02d-%04d\t\t%02d:%02d",emprestimos[i].dataDevolucao.dia,emprestimos[i].dataDevolucao.mes,emprestimos[i].dataDevolucao.ano,
                        emprestimos[i].dataDevolucao.hora,emprestimos[i].dataDevolucao.minuto);
-                printf("\nDistancia percorrida:%d",emprestimos[i].distanciaPercorrida);
+                printf("\nDistancia percorrida:%.2f",emprestimos[i].distanciaPercorrida);
                 j++;
 
             }
@@ -187,7 +183,7 @@ void consultarEmprestimo(tipoBicicleta bicicletas[],tipoUtente utentes[],tipoEmp
     }
 }
 
-void listarEmprestimos(tipoBicicleta bicicletas[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo)
+void listarEmprestimos(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo)
 {
     int numeroUtente;
     int pos = -1;
@@ -203,17 +199,17 @@ void listarEmprestimos(tipoBicicleta bicicletas[],tipoUtente utentes[],tipoEmpre
         printf("\nDesignacao da bicicleta:%s",emprestimos[i].designacaoBicicleta);
         printf("\nCampus Origem:%s",emprestimos[i].campusOrigem);
         printf("\nCampus destino:%s",emprestimos[i].campusDestino);
-        printf("\nData de emprestimo:%d-%d-%d\t\t%d:%d",emprestimos[i].dataEmprestimo.dia,emprestimos[i].dataEmprestimo.mes,emprestimos[i].dataEmprestimo.ano,
+        printf("\nData de emprestimo:%02d-%02d-%04d\t\t%02d:%02d",emprestimos[i].dataEmprestimo.dia,emprestimos[i].dataEmprestimo.mes,emprestimos[i].dataEmprestimo.ano,
                emprestimos[i].dataEmprestimo.hora,emprestimos[i].dataEmprestimo.minuto);
-        printf("\nData de devolucao:%d-%d-%d\t\t%d:%d",emprestimos[i].dataDevolucao.dia,emprestimos[i].dataDevolucao.mes,emprestimos[i].dataDevolucao.ano,
+        printf("\nData de devolucao:%02d-%02d-%04d\t\t%02d:%02d",emprestimos[i].dataDevolucao.dia,emprestimos[i].dataDevolucao.mes,emprestimos[i].dataDevolucao.ano,
                emprestimos[i].dataDevolucao.hora,emprestimos[i].dataDevolucao.minuto);
-        printf("\nDistancia percorrida:%d",emprestimos[i].distanciaPercorrida);
+        printf("\nDistancia percorrida:%.2f",emprestimos[i].distanciaPercorrida);
         j++;
 
     }
 }
 
-void devolverBicicleta(tipoBicicleta bicicletas[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo,int *bicicletasOcupadas)
+void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo,int *bicicletasOcupadas)
 {
     int numeroUtente;
     int pos = -1;
@@ -222,7 +218,6 @@ void devolverBicicleta(tipoBicicleta bicicletas[],tipoUtente utentes[],tipoEmpre
     char designacao[MAXSTRING];
     int opcao;
     int dia,mes,ano;
-    int dataValida = -1;
     float distancia;
 
     numeroUtente = lerInteiro("\nInsira o numero de utente que quer devolver uma bicicleta:",0,MAXNUMEROUTENTE);
@@ -237,13 +232,13 @@ void devolverBicicleta(tipoBicicleta bicicletas[],tipoUtente utentes[],tipoEmpre
             {
                 for(j=0; j<contBicicleta; ++j)
                 {
-                    if(strcmp(bicicletas[j].designacao,emprestimos[i].designacaoBicicleta)==0 && strcmp(bicicletas[j].estado,"emprestada")==0)
+                    if(strcmp(bicicleta[j].designacao,emprestimos[i].designacaoBicicleta)==0 && strcmp(bicicleta[j].estado,"emprestada")==0)
                     {
-                        strcpy(bicicletas[j].estado,"disponivel");
+                        strcpy(bicicleta[j].estado,"disponivel");
 
                         emprestimos[i].dataDevolucao = lerData();
                         distancia= lerFloat("\nIntroduza a distancia percorrida:",MIN,MAXDISTANCIA);
-                        bicicletas[j].distanciaTotal= bicicletas[j].distanciaTotal + distancia;
+                        bicicleta[j].distanciaTotal= bicicleta[j].distanciaTotal + distancia;
                         emprestimos[i].distanciaPercorrida = distancia;
                         (*bicicletasOcupadas)--;
 

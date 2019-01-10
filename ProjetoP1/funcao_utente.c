@@ -28,13 +28,7 @@ void inserirUtente(tipoUtente Utente[],int *contUtente){
         Utente[*contUtente].telemovel = lerInteiro("\nTelemovel do utente:",MINTELEMOVEL,MAXTELEMOVEL);
 
         ///estudante docente tecnico administrativo convidado
-        printf("\n\nInsira o tipo do utente:");
-
-        printf("\n1->Estudante");
-        printf("\n2->Docente");
-        printf("\n3->Tecnico Administrativo");
-        printf("\n4->Convidado");
-        opcao = lerInteiro("\nEscolhe uma opcao: ",1,4);
+        opcao = subMenuTipoUtente();
 
         switch(opcao){
             case 1:
@@ -87,14 +81,7 @@ void alterarUtente(tipoUtente Utente[],int contUtente){
         lerString("\nNome do utente:",Utente[pos].nome,MAXSTRING);
         Utente[pos].telemovel = lerInteiro("\nTelemovel do utente:",MINTELEMOVEL,MAXTELEMOVEL);
 
-        ///estudante docente tecnico administrativo convidado
-        printf("\n\nInsira o tipo do utente:");
-
-        printf("\n1->Estudante");
-        printf("\n2->Docente");
-        printf("\n3->Tecnico Administrativo");
-        printf("\n5->Convidado");
-        opcao = lerInteiro("\nEscolhe uma opcao: ",1,5);
+        opcao = subMenuTipoUtente();
 
         switch(opcao){
             case 1:
@@ -130,7 +117,7 @@ void consultarUtente(tipoUtente Utente[],int contUtente){
 
     if(pos != -1){
         printf("\nUtente encontrado");
-        printf("\nNome Utente:%s",Utente[pos].nome);
+        printf("\n\nNome Utente:%s",Utente[pos].nome);
         printf("\nNumero Utente:%d",Utente[pos].numero);
         printf("\nTelemovel Utente:%d",Utente[pos].telemovel);
         printf("\nTipo de Utente:%s",Utente[pos].tipo);
@@ -145,7 +132,7 @@ void listarUtente(tipoUtente Utente[],int contUtente){
     int i;
 
     for(i=0;i<contUtente;++i){
-        printf("\nNome Utente:%s",Utente[i].nome);
+        printf("\n\nNome Utente:%s",Utente[i].nome);
         printf("\nNumero Utente:%d",Utente[i].numero);
         printf("\nTelemovel Utente:%d",Utente[i].telemovel);
         printf("\nTipo de Utente:%s",Utente[i].tipo);

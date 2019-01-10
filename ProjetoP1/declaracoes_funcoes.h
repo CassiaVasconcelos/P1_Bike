@@ -10,19 +10,22 @@ void lerString(char mensagem[MAXSTRING], char vetorCaracteres[MAXSTRING], int ma
 void limpaBufferStdin(void);
 tipoData lerData(void);
 //menus
-int menuPrincipal(int contBicicletas, int contEmprestimo, int contEspera, int contUtente, int bicicletasOcupadas);
+int menuPrincipal(int contBicicletas, int contEmprestimo, int contEspera, int contUtente, int bicicletasOcupadas, float distTotPecorrida);
 char menuBicicleta(int contBicicletas);
 char menuUtente(int contUtente);
+int menuCampus();
+int subMenuTipoUtente();
 //bicicletas
 void inserirBicicleta(tipoBicicleta bicicletas[],int *contBicicletas);
 void consultarBicicleta(tipoBicicleta bicicletas[],int contBicicletas);
 void listarBicicletas(tipoBicicleta bicicletas[],int contBicicletas);
 int procurarBicicleta(tipoBicicleta bicicletas[],char designacao[],int contBicicletas);
+int bicicletasDisponiveis(tipoBicicleta bicicletas[], int *contBicicletas);
 //emprestimos
 tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int *contEmprestimo,int *idEmprestimo,int *bicicletasOcupadas);
-void listarEmprestimos(tipoBicicleta bicicletas[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo);
-void consultarEmprestimo(tipoBicicleta bicicletas[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo);
-void devolverBicicleta(tipoBicicleta bicicletas[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo,int *bicicletasOcupadas);
+void listarEmprestimos(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo);
+void consultarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo);
+void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo,int *bicicletasOcupadas);
 //ficheiro
 void lerFicheiroBinBicicleta(tipoBicicleta bicicleta[MAXBICICLETA], int *contBicicletas);
 void escreverFicheiroBinBicicleta(tipoBicicleta bicicleta[MAXBICICLETA], int contBicicletas);

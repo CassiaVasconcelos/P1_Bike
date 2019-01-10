@@ -15,7 +15,9 @@ int main()
     int opcao,contBicicletas=0,contEmprestimo=0,contEspera=0,contUtente=0,bicicletasOcupadas=0;
     int idEmprestimo = 1;
     char opcaoBicicleta,opcUtente,opcEmprestimo;
+    float distTotPecorrida=0.;
 
+  //  tipoData data;
     tipoBicicleta bicicleta[MAXBICICLETA];
     tipoUtente utente[MAXUTENTE];
     tipoEmprestimo *emprestimo;
@@ -25,10 +27,12 @@ int main()
     lerFicheiroBinBicicleta(bicicleta,&contBicicletas);
     lerFicheiroBinUtente(utente,&contUtente);
     emprestimo = lerFicheiroBinEmprestimo(emprestimo,&contEmprestimo);
+    bicicletasOcupadas=bicicletasDisponiveis(bicicleta,&contBicicletas);
+    //printf("\nOCUPADAS: %d",bicicletasOcupadas);
 
     do
     {
-        opcao = menuPrincipal(contBicicletas, contEmprestimo, contEspera, contUtente, bicicletasOcupadas);
+        opcao = menuPrincipal(contBicicletas, contEmprestimo, contEspera, contUtente, bicicletasOcupadas, distTotPecorrida);
         switch(opcao)
         {
         case 1:
@@ -90,7 +94,7 @@ int main()
                 emprestimo = registarEmprestimo(bicicleta,utente,emprestimo,contBicicletas,contUtente,&contEmprestimo,&idEmprestimo,&bicicletasOcupadas);
                 break;
             case 'D':
-                devolverBicicleta(bicicleta,utente,emprestimo,contBicicletas,contUtente,contEmprestimo,bicicletasOcupadas);
+                devolverBicicleta(bicicleta,utente,emprestimo,contBicicletas,contUtente,contEmprestimo,&bicicletasOcupadas);
                 break;
             case 'C':
                 if(contEmprestimo == 0)

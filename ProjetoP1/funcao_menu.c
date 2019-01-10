@@ -9,16 +9,16 @@
 #include "constantes.h"
 #include "estruturas.h"
 
-int menuPrincipal(int contBicicletas, int contEmprestimo, int contEspera, int contUtente, int bicicletasOcupadas){
+int menuPrincipal(int contBicicletas, int contEmprestimo, int contEspera, int contUtente, int bicicletasOcupadas, float distTotPecorrida){
     int opcao,top2=0;
-    float top=0.;
+ //   float top=0.;
     int bicicletasDisponiveis = MAXBICICLETA - bicicletasOcupadas;
     printf("\n\t   Welcome to UBike.\n\n");
     printf("\nNumero de bicicletas:%d",contBicicletas);
     printf("\nNumero de Utente:%d",contUtente);
     printf("\nNumero de emprestimos:%d",contEmprestimo);
     printf("\nQuantidade de pedidos na lista de espera:%d",contEspera);
-    printf("\nDistancia total percorrida:%.2f",top);
+    printf("\nDistancia total percorrida:%.2f",distTotPecorrida);
     printf("\nQuantidade de bicicletas avariadas:",top2);
     printf("\nNumero de bicicletas disponiveis:%d",bicicletasDisponiveis);
     printf("\n\n1->     Bicicletas\n");
@@ -96,3 +96,30 @@ char menuEmprestimo(int bicicletasOcupadas){
 
     return opcao;
 }
+
+int menuCampus(){
+        int opcao;
+
+        printf("\n\nInsira o campus da bicicleta:");
+        printf("\n1->Residencias");
+        printf("\n2->Campus 1");
+        printf("\n3->Campus 2");
+        printf("\n4->Campus 5");
+        opcao = lerInteiro("\nEscolhe uma opcao: ",1,4);
+
+        return opcao;
+}
+
+int subMenuTipoUtente(){
+        int opcao;
+
+        printf("\n\nInsira o tipo do utente:");
+        printf("\n1->Estudante");
+        printf("\n2->Docente");
+        printf("\n3->Tecnico Administrativo");
+        printf("\n4->Convidado");
+        opcao = lerInteiro("\nEscolhe uma opcao: ",1,4);
+
+        return opcao;
+}
+

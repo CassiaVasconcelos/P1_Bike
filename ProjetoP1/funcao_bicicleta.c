@@ -28,12 +28,7 @@ void inserirBicicleta(tipoBicicleta bicicletas[],int *contBicicletas){
         strcpy(bicicletas[*contBicicletas].designacao,designacao); //salva a designacao da bike no vetor
         strcpy(bicicletas[*contBicicletas].estado,"disponivel");    //"automaticamente" passa a estar disponivel
 
-        printf("\n\nInsira o campus da bicicleta:");
-        printf("\n1->Residencias");
-        printf("\n2->Campus 1");
-        printf("\n3->Campus 2");
-        printf("\n4->Campus 5");
-        opcao = lerInteiro("\nEscolhe uma opcao: ",1,4);
+       opcao = menuCampus();
 
         switch(opcao){
             case 1:
@@ -70,7 +65,7 @@ void consultarBicicleta(tipoBicicleta bicicletas[],int contBicicleta){
     pos = procurarBicicleta(bicicletas,designacao,contBicicleta);
 
     if(pos != -1){
-        printf("\nBicicleta Encontrada");
+        printf("\n\nBicicleta Encontrada");
         printf("\nDesignacao:%s",bicicletas[pos].designacao);
         printf("\nCampus:%s",bicicletas[pos].campus);
         printf("\nModelo:%s",bicicletas[pos].modelo);
@@ -79,7 +74,7 @@ void consultarBicicleta(tipoBicicleta bicicletas[],int contBicicleta){
         printf("\nQuantidade Emprestimo:%d",bicicletas[pos].quantidadeEmprestimos);
         printf("\nDistancia percorrida:%d\n\n",bicicletas[pos].distanciaTotal);
     }else{
-        printf("\n\nNao existe ninhuma bicicleta com essa designacao\n");
+        printf("\n\nNao existe nenhuma bicicleta com essa designacao\n");
     }
 
 }
@@ -88,7 +83,7 @@ void listarBicicletas(tipoBicicleta bicicletas[],int contBicicleta){
     int i,j = 1;
 
     for(i = 0;i<contBicicleta;++i){
-        printf("\nBicicleta:%d",j);
+        printf("\n\nBicicleta:%d",j);
         printf("\nDesignacao:%s",bicicletas[i].designacao);
         printf("\nCampus:%s",bicicletas[i].campus);
         printf("\nModelo:%s",bicicletas[i].modelo);
@@ -112,4 +107,18 @@ int procurarBicicleta(tipoBicicleta bicicletas[],char designacao[],int contBicic
         }
     }
     return pos;
+}
+
+
+int bicicletasDisponiveis(tipoBicicleta bicicletas[], int *contBicicleta){
+    int ocupadas=0, i=0;
+
+        for(i=0;i<*contBicicleta;++i){
+    ///compara alfabeticamente strings destino e origem, devolve 0 se iguais
+        if(strcmp(bicicletas[i].estado,"disponivel")!=0){//se forem iguais devolve 0, ja existe
+            ocupadas++;
+        }
+    }
+
+    return ocupadas;
 }

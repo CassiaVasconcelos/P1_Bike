@@ -33,6 +33,7 @@
 		</Compiler>
 		<Unit filename="auxiliares.h" />
 		<Unit filename="constantes.h" />
+		<Unit filename="declaracoes_funcoes.h" />
 		<Unit filename="estruturas.h" />
 		<Unit filename="funcao_auxiliar.c">
 			<Option compilerVar="CC" />
@@ -40,7 +41,16 @@
 		<Unit filename="funcao_bicicleta.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="funcao_emprestimo.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="funcao_ficheiro.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="funcao_menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="funcao_utente.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="main.c">
