@@ -129,8 +129,8 @@ tipoData lerData(void)
 
     data.dia = lerInteiro(" dia:", 1, maxDiasMes);
 
-    data.hora = lerInteiro("hora:",MIN,MAXHORAS);
-    data.minuto = lerInteiro("minutos:",MIN,MAXMINUTOS);
+    data.hora = lerInteiro("hora:",0,MAXHORAS);
+    data.minuto = lerInteiro("minutos:",0,MAXMINUTOS);
 
     return data;
 }

@@ -24,7 +24,7 @@ int main()
 
     lerFicheiroBinBicicleta(bicicleta,&contBicicletas);
     lerFicheiroBinUtente(utente,&contUtente);
-    lerFicheiroBinEmprestimo(emprestimo,&contEmprestimo);
+    emprestimo = lerFicheiroBinEmprestimo(emprestimo,&contEmprestimo);
 
     do
     {
@@ -90,10 +90,27 @@ int main()
                 emprestimo = registarEmprestimo(bicicleta,utente,emprestimo,contBicicletas,contUtente,&contEmprestimo,&idEmprestimo,&bicicletasOcupadas);
                 break;
             case 'D':
+                devolverBicicleta(bicicleta,utente,emprestimo,contBicicletas,contUtente,contEmprestimo,bicicletasOcupadas);
                 break;
             case 'C':
+                if(contEmprestimo == 0)
+                {
+                    printf("\nAinda nao foram efetuados qualquer emprestimo");
+                }
+                else
+                {
+                    consultarEmprestimo(bicicleta,utente,emprestimo,contBicicletas,contUtente,contEmprestimo);
+                }
                 break;
             case 'L':
+                if(contEmprestimo == 0)
+                {
+                    printf("\nAinda nao foram efetuados qualquer emprestimo");
+                }
+                else
+                {
+                    listarEmprestimos(bicicleta,utente,emprestimo,contBicicletas,contUtente,contEmprestimo);
+                }
                 break;
             }
             break;
