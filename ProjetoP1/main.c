@@ -9,20 +9,22 @@
 #include "constantes.h"
 #include "estruturas.h"
 
-
 int main()
 {
     int opcao,contBicicletas=0,contEmprestimo=0,contEspera=0,contUtente=0,bicicletasOcupadas=0;
     int idEmprestimo = 1, quantEmprestimos=0, quantAvariadas=0;
-    char opcaoBicicleta,opcUtente,opcEmprestimo;
+    char opcaoBicicleta,opcUtente,opcEmprestimo, opcEspera;
     float distTotPecorrida=0.;
+    int verPossibEmprestimo=0;
 
   //  tipoData data;
     tipoBicicleta bicicleta[MAXBICICLETA];
     tipoUtente utente[MAXUTENTE];
     tipoEmprestimo *emprestimo;
+    tipoEspera *espera;
 
     emprestimo=NULL;
+    espera=NULL;
 
     lerFicheiroBinBicicleta(bicicleta,&contBicicletas);
     lerFicheiroBinUtente(utente,&contUtente);
@@ -97,13 +99,18 @@ int main()
             }
             break;
         case 3:
+            opcEspera = menuEspera(contEspera);
             break;
         case 4:
             opcEmprestimo = menuEmprestimo(bicicletasOcupadas);
             switch(opcEmprestimo)
             {
             case 'R':
-                emprestimo = registarEmprestimo(bicicleta,utente,emprestimo,contBicicletas,contUtente,&contEmprestimo,&idEmprestimo,&bicicletasOcupadas);
+                emprestimo = registarEmprestimo(bicicleta,utente,emprestimo,contBicicletas,contUtente,&contEmprestimo,&idEmprestimo,&bicicletasOcupadas,&verPossibEmprestimo);
+                if(verPossibEmprestimo==0){
+                    printf("\nInfelizmente nao ha bicicletas disponiveis, voce sera colocado na lista de espera!");
+                    espera = registrarEspera(espera,utente,&contEspera,contUtente);
+                }
                 break;
             case 'D':
                 devolverBicicleta(bicicleta,utente,emprestimo,contBicicletas,contUtente,contEmprestimo,&bicicletasOcupadas);

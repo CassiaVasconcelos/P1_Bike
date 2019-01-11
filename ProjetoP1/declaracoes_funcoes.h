@@ -15,8 +15,10 @@ tipoData lerData(void);
 int menuPrincipal(int contBicicletas, int contEmprestimo, int contEspera, int contUtente, int bicicletasOcupadas, float distTotPecorrida,  int quantAvariadas);
 char menuBicicleta(int contBicicletas);
 char menuUtente(int contUtente);
+char menuEmprestimo(int bicicletasOcupadas);
 int menuCampus();
 int subMenuTipoUtente();
+int menuEspera(int contadorEspera);
 
 //bicicletas
 void inserirBicicleta(tipoBicicleta bicicletas[],int *contBicicletas);
@@ -29,7 +31,7 @@ float atualizarDistanciaTotal(tipoBicicleta bicicleta[],int contBicicletas);
 int atualizarNumeroBicicletasAvariadas(tipoBicicleta bicicleta[],int contBicicletas);
 
 //emprestimos
-tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int *contEmprestimo,int *idEmprestimo,int *bicicletasOcupadas);
+tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int *contEmprestimo,int *idEmprestimo,int *bicicletasOcupadas, int *verPossibEmprestimo);
 void listarEmprestimos(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo);
 void consultarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo);
 void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo,int *bicicletasOcupadas);
@@ -51,5 +53,7 @@ void alterarUtente(tipoUtente Utente[],int contUtente);
 void consultarUtente(tipoUtente Utente[],int contUtente);
 void listarUtente(tipoUtente Utente[],int contUtente);
 
+//espera
+tipoEspera *registrarEspera(tipoEspera espera[],tipoUtente utente[],int *contEspera,int contUtente);
 
 #endif // DECLARACOES_FUNCOES_H_INCLUDED

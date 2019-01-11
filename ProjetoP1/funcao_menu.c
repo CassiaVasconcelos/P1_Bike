@@ -123,3 +123,16 @@ int subMenuTipoUtente(){
         return opcao;
 }
 
+int menuEspera(int contadorEspera){
+        int opcao;
+
+        printf("\n\nInsira o tipo do utente:");
+        printf("\n1->Estudante");
+        printf("\n2->Docente");
+        printf("\n3->Tecnico Administrativo");
+        printf("\n4->Convidado");
+        opcao = lerInteiro("\nEscolhe uma opcao: ",1,4);
+
+        return opcao;
+}
+

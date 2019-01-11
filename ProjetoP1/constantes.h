@@ -25,4 +25,11 @@
 #define NUMMAX 10
 #define NUMMIN 0
 
+#define DIST_R_C1   1
+#define DIST_R_C2   2
+#define DIST_R_C5   3
+#define DIST_C1_C2  4
+#define DIST_C1_C5  5
+#define DIST_C2_C5  6
+
 #endif // CONSTANTES_H_INCLUDED

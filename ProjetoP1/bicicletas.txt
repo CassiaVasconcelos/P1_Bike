@@ -18,3 +18,8 @@ Distancia total percorrida: 0
 Data da avaria: 03/03/2018	03:03
 Causa da avaria: o enrico me empurrou da bike,e quebrou o pedal
 -----------------------------------------------------
+Designacao bicicleta: 2
+Distancia total percorrida: 0.000000
+Data da avaria: 12/12/2019	06:02
+Causa da avaria: um papel voou na minha cara e eu cai
+-----------------------------------------------------

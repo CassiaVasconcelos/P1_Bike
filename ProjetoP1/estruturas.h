@@ -42,4 +42,8 @@ typedef struct{
     int distanciaPercorrida;
 }tipoEmprestimo;
 
+typedef struct{
+    tipoEmprestimo emprestimo;
+}tipoEspera;
+
 #endif // ESTRUTURAS_H_INCLUDED

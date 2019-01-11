@@ -9,7 +9,7 @@
 #include "constantes.h"
 #include "estruturas.h"
 
-tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtente,int *contEmprestimo,int *idEmprestimo,int *bicicletasOcupadas)
+tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtente,int *contEmprestimo,int *idEmprestimo,int *bicicletasOcupadas, int *verPossibEmprestimo)
 {
     int pos = -1;
     int i;
@@ -122,6 +122,7 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
                             (*contEmprestimo)++;
                             (*idEmprestimo)++;
                             (*bicicletasOcupadas)++;
+                            (*verPossibEmprestimo)=1;
 
                             break;
 
@@ -134,6 +135,8 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
                     else
                     {
                         naoDisponivel=1;
+                        (*verPossibEmprestimo)=0;
+
                     }
 
                 }

@@ -90,17 +90,17 @@
 	"constantes.h"
 	"estruturas.h"
 
-1547165253 c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\declaracoes_funcoes.h
+1547250095 c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\declaracoes_funcoes.h
 	"constantes.h"
 	"estruturas.h"
 
-1546992508 c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\constantes.h
+1547250095 c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\constantes.h
 
-1547145746 c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\estruturas.h
+1547244730 c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\estruturas.h
 	"constantes.h"
 	"declaracoes_funcoes.h"
 
-1547165327 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\funcao_bicicleta.c
+1547245100 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\funcao_bicicleta.c
 	<stdio.h>
 	<string.h>
 	<ctype.h>
@@ -122,7 +122,7 @@
 	"constantes.h"
 	"estruturas.h"
 
-1547165386 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\funcao_menu.c
+1547246675 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\funcao_menu.c
 	<stdio.h>
 	<string.h>
 	<ctype.h>
@@ -144,7 +144,7 @@
 	"constantes.h"
 	"estruturas.h"
 
-1547165683 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\main.c
+1547244796 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\main.c
 	<stdio.h>
 	<string.h>
 	<ctype.h>
@@ -155,7 +155,18 @@
 	"constantes.h"
 	"estruturas.h"
 
-1547161867 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\funcao_emprestimo.c
+1547246675 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\funcao_emprestimo.c
+	<stdio.h>
+	<string.h>
+	<ctype.h>
+	<limits.h>
+	<stdlib.h>
+	<time.h>
+	"declaracoes_funcoes.h"
+	"constantes.h"
+	"estruturas.h"
+
+1547244730 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\funcao_espera.c
 	<stdio.h>
 	<string.h>
 	<ctype.h>
