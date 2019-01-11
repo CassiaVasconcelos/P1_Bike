@@ -13,7 +13,7 @@
 int main()
 {
     int opcao,contBicicletas=0,contEmprestimo=0,contEspera=0,contUtente=0,bicicletasOcupadas=0;
-    int idEmprestimo = 1;
+    int idEmprestimo = 1, quantEmprestimos=0, quantAvariadas=0;
     char opcaoBicicleta,opcUtente,opcEmprestimo;
     float distTotPecorrida=0.;
 
@@ -26,13 +26,24 @@ int main()
 
     lerFicheiroBinBicicleta(bicicleta,&contBicicletas);
     lerFicheiroBinUtente(utente,&contUtente);
+
     emprestimo = lerFicheiroBinEmprestimo(emprestimo,&contEmprestimo);
-    bicicletasOcupadas=bicicletasDisponiveis(bicicleta,&contBicicletas);
+
+
+    if(quantEmprestimos!=0){
+        idEmprestimo=quantEmprestimos+1;
+        //printf("idEmprestimo: %d", idEmprestimo);
+    }
     //printf("\nOCUPADAS: %d",bicicletasOcupadas);
 
     do
     {
-        opcao = menuPrincipal(contBicicletas, contEmprestimo, contEspera, contUtente, bicicletasOcupadas, distTotPecorrida);
+        bicicletasOcupadas = bicicletasDisponiveis(bicicleta,&contBicicletas);
+        quantEmprestimos = quantidadeEmprestimos(emprestimo,&contEmprestimo);
+        distTotPecorrida = atualizarDistanciaTotal(bicicleta,contBicicletas);
+        quantAvariadas = atualizarNumeroBicicletasAvariadas(bicicleta,contBicicletas);
+
+        opcao = menuPrincipal(contBicicletas, contEmprestimo, contEspera, contUtente, bicicletasOcupadas, distTotPecorrida,quantAvariadas);
         switch(opcao)
         {
         case 1:
@@ -56,6 +67,7 @@ int main()
                 listarBicicletas(bicicleta,contBicicletas);
                 break;
             case 'R':
+                registarAvariaReparacao(bicicleta,contBicicletas,&bicicletasOcupadas);
                 break;
             }
             break;

@@ -32,9 +32,9 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
     else
     {
 
-        for(i=0; i<*contEmprestimo; ++i)    //verificar se ja possui emprestimo
+        for(i=0; i<*contEmprestimo; i++)    //verificar se ja possui emprestimo
         {
-          //  printf("teste2:%d",emprestimos[i].codigoUtente);
+            //  printf("teste2:%d",emprestimos[i].codigoUtente);
             if(emprestimos[i].dataDevolucao.dia == 0 && utentes[pos].numero == emprestimos[i].codigoUtente)
             {
                 emprestimoRealizado=1;
@@ -66,13 +66,13 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
                 break;
             }
 
-            for(i=0; i<contBicicleta; ++i)
+            for(i=0; i<contBicicleta; i++)
             {
 
                 if(strcmp(bicicleta[i].campus,campus)==0)
                 {
 
-                    if(strcmp(bicicleta[i].estado,"disponivel")==0)  //ve se tem alguma bike disponivel naquele campus
+                    if(strcmp(bicicleta[i].estado,"disponivel")==0)  //ve se tem alguma bicicleta disponivel naquele campus
                     {
 
                         aux = realloc(aux,(*contEmprestimo+1)*sizeof(tipoEmprestimo));
@@ -89,7 +89,8 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
                             aux[*contEmprestimo].dataEmprestimo = lerData();
                             strcpy(aux[*contEmprestimo].campusOrigem,campus);
 
-                            opcao = menuCampus();
+                            opcao = menuCampus();   ///menu
+
 
                             switch(opcao)
                             {
@@ -109,11 +110,12 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
                         }
                         if(strcmp(aux[*contEmprestimo].campusOrigem,campus)==0)
                         {
-                            printf("Insira outro local para deixar a bike");
+                            printf("Insira outro local para deixar a bicicleta");
                         }
                         else
                         {
                             strcpy(aux[*contEmprestimo].campusDestino,campus);
+                            //aux[*contEmprestimo].numeroRegisto = *idEmprestimo;
                             bicicleta[i].quantidadeEmprestimos++;
                             strcpy(bicicleta[i].estado,"emprestada");
                             utentes[pos].quantidadeEmprestimos++;
@@ -128,14 +130,22 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
                         //int distanciaPercorrida;
 
 
-                    } else {
+                    }
+                    else
+                    {
                         naoDisponivel=1;
                     }
+
+                }
+                else
+                {
+                    naoDisponivel=1;
                 }
             }
 
-            if(naoDisponivel==1){
-                printf("\nNao ha bicicletas disponiveis.");
+            if(naoDisponivel==1)
+            {
+                printf("\nNao ha bicicletas disponiveis no campus selecionado.");
             }
         }
     }
@@ -157,14 +167,14 @@ void consultarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmpr
 
     if(pos != -1)
     {
-        for(i=0; i<contEmprestimo; ++i)
+        for(i=0; i<contEmprestimo; i++)
         {
             if(emprestimos[i].codigoUtente == utentes[pos].numero)
             {
                 printf("\nEmprestimo %d",j);
-                printf("\nNumero de registo:%d",emprestimos[i].numeroRegisto);
+                printf("\n\nID do emprestimo:%d",emprestimos[i].numeroRegisto);
                 printf("\nCodigo de utente:%d\t\tNome Utente:%s",emprestimos[i].codigoUtente,utentes[pos].nome);
-                printf("\nDesignacao da bicicleta:%s",emprestimos[i].designacaoBicicleta);
+                printf("\nID da bicicleta:%s",emprestimos[i].designacaoBicicleta);
                 printf("\nCampus Origem:%s",emprestimos[i].campusOrigem);
                 printf("\nCampus destino:%s",emprestimos[i].campusDestino);
                 printf("\nData de emprestimo:%02d-%02d-%04d\t\t%02d:%02d",emprestimos[i].dataEmprestimo.dia,emprestimos[i].dataEmprestimo.mes,emprestimos[i].dataEmprestimo.ano,
@@ -191,12 +201,12 @@ void listarEmprestimos(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmpres
     int j = 1;
 
 
-    for(i=0; i<contEmprestimo; ++i)
+    for(i=0; i<contEmprestimo; i++)
     {
-        printf("\nEmprestimo %d",j);
-        printf("\nNumero de registo:%d",emprestimos[i].numeroRegisto);
+        printf("\n\nEmprestimo %d",j);
+        printf("\nID do emprestimo:%d",emprestimos[i].numeroRegisto);
         printf("\nCodigo de utente:%d",emprestimos[i].codigoUtente);
-        printf("\nDesignacao da bicicleta:%s",emprestimos[i].designacaoBicicleta);
+        printf("\nID da bicicleta:%s",emprestimos[i].designacaoBicicleta);
         printf("\nCampus Origem:%s",emprestimos[i].campusOrigem);
         printf("\nCampus destino:%s",emprestimos[i].campusDestino);
         printf("\nData de emprestimo:%02d-%02d-%04d\t\t%02d:%02d",emprestimos[i].dataEmprestimo.dia,emprestimos[i].dataEmprestimo.mes,emprestimos[i].dataEmprestimo.ano,
@@ -219,6 +229,9 @@ void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmpres
     int opcao;
     int dia,mes,ano;
     float distancia;
+    int possuiBicicleta=0;
+    tipoData verificar;
+    int dataValida= 0;
 
     numeroUtente = lerInteiro("\nInsira o numero de utente que quer devolver uma bicicleta:",0,MAXNUMEROUTENTE);
 
@@ -226,30 +239,151 @@ void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmpres
 
     if(pos != -1)
     {
-        for(i=0 ; i<contEmprestimo; ++i)
+        for(i=0 ; i<contEmprestimo; i++)
         {
-            if(emprestimos[i].codigoUtente == utentes[pos].numero)
+            //se data de devolução<data de empréstimo, exibir erro.
+            if(emprestimos[i].dataDevolucao.dia == 0 && utentes[pos].numero == emprestimos[i].codigoUtente)
             {
                 for(j=0; j<contBicicleta; ++j)
                 {
                     if(strcmp(bicicleta[j].designacao,emprestimos[i].designacaoBicicleta)==0 && strcmp(bicicleta[j].estado,"emprestada")==0)
                     {
-                        strcpy(bicicleta[j].estado,"disponivel");
-
-                        emprestimos[i].dataDevolucao = lerData();
-                        distancia= lerFloat("\nIntroduza a distancia percorrida:",MIN,MAXDISTANCIA);
-                        bicicleta[j].distanciaTotal= bicicleta[j].distanciaTotal + distancia;
-                        emprestimos[i].distanciaPercorrida = distancia;
-                        (*bicicletasOcupadas)--;
-
+                        verificar= lerData();
+                        dataValida = verificarData(verificar,emprestimos[i].dataEmprestimo);
+                        if(dataValida==-1)
+                        {
+                            ///data invalida
+                            printf("\nA data de devolucao tem de ser superior a data de emprestimo. ");
+                        }
+                        else
+                        {
+                            strcpy(bicicleta[j].estado,"disponivel");
+                            strcpy(bicicleta[j].campus, emprestimos[i].campusDestino);
+                            emprestimos[i].dataDevolucao=verificar;
+                            distancia= lerFloat("\nIntroduza a distancia percorrida:",MIN,MAXDISTANCIA);
+                            bicicleta[j].distanciaTotal= bicicleta[j].distanciaTotal + distancia;
+                            emprestimos[i].distanciaPercorrida = distancia;
+                            (*bicicletasOcupadas)--;
+                        }
+                    }
+                    else
+                    {
+                        possuiBicicleta=1;
                     }
                 }
+
+            }
+            else
+            {
+                printf("Este utente nao possui uma bicicleta para ser devolvida.");
             }
         }
+//        if(possuiBicicleta==1)
+//        {
+//            printf("Este utente nao possui uma bicicleta para ser devolvida.");
+//        }
     }
     else
     {
         printf("\nNao existe nenhum utente com o numero escolhido");
 
     }
+}
+
+int quantidadeEmprestimos(tipoEmprestimo emprestimos[], int *contEmprestimo)
+{
+    int quantidade=0, i=0;
+
+    for(i=0; i<*contEmprestimo; i++)
+    {
+        quantidade++;
+    }
+
+    return quantidade;
+}
+
+int verificarData(tipoData verificar,tipoData dataEmprestimo)
+{
+    int dataValida=0;
+
+    if(dataEmprestimo.ano < verificar.ano)
+    {
+        dataValida=1;
+    }
+    else
+    {
+        if(dataEmprestimo.ano > verificar.ano)
+        {
+            dataValida=-1;
+        }
+        else
+        {
+            ///anos iguais
+            if(dataEmprestimo.mes < verificar.mes)
+            {
+                dataValida=1;
+            }
+            else
+            {
+                if(dataEmprestimo.mes > verificar.mes)
+                {
+                    dataValida=-1;
+                }
+                else
+                {
+                    ///meses iguais
+                    if(dataEmprestimo.dia < verificar.dia)
+                    {
+                        dataValida = 1;
+                    }
+                    else
+                    {
+                        if(dataEmprestimo.dia > verificar.dia)
+                        {
+                            dataValida = -1;
+                        }
+                        else
+                        {
+                            ///dias iguais
+
+                            if(dataEmprestimo.hora < verificar.hora)
+                            {
+                                dataValida=1;
+                            }
+                            else
+                            {
+                                if(dataEmprestimo.hora > verificar.hora)
+                                {
+                                    dataValida=-1;
+                                }
+                                else
+                                {
+                                    ///horas iguais
+
+                                    if(dataEmprestimo.minuto < verificar.minuto)
+                                    {
+                                        dataValida=1;
+                                    }
+                                    else
+                                    {
+                                        if(dataEmprestimo.minuto > verificar.minuto)
+                                        {
+                                            dataValida=-1;
+                                        }
+                                        else
+                                        {
+                                            ///minutos iguais
+                                            dataValida=-1;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+    return dataValida;
 }

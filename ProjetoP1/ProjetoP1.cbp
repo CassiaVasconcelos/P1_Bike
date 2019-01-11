@@ -31,7 +31,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="auxiliares.h" />
 		<Unit filename="constantes.h" />
 		<Unit filename="declaracoes_funcoes.h" />
 		<Unit filename="estruturas.h" />

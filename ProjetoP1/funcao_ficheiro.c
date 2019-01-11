@@ -15,7 +15,7 @@ void lerFicheiroBinBicicleta(tipoBicicleta bicicleta[MAXBICICLETA], int *contBic
     ficheiro=fopen("bicicletas.dat","rb");
     if (ficheiro == NULL)
     {
-        printf ("Erro abrir ficheiro bike");
+        printf ("Erro abrir ficheiro bicicleta");
     }
     else
     {
@@ -35,7 +35,7 @@ void escreverFicheiroBinBicicleta(tipoBicicleta bicicleta[MAXBICICLETA], int con
     ficheiro=fopen("bicicletas.dat","wb");
     if(ficheiro==NULL)
     {
-        printf("Erro de abertura bike");
+        printf("Erro de abertura bicicleta");
     }
     else
     {

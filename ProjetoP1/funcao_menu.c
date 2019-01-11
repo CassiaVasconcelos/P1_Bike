@@ -9,8 +9,8 @@
 #include "constantes.h"
 #include "estruturas.h"
 
-int menuPrincipal(int contBicicletas, int contEmprestimo, int contEspera, int contUtente, int bicicletasOcupadas, float distTotPecorrida){
-    int opcao,top2=0;
+int menuPrincipal(int contBicicletas, int contEmprestimo, int contEspera, int contUtente, int bicicletasOcupadas, float distTotPecorrida, int quantAvariadas){
+    int opcao;
  //   float top=0.;
     int bicicletasDisponiveis = MAXBICICLETA - bicicletasOcupadas;
     printf("\n\t   Welcome to UBike.\n\n");
@@ -19,7 +19,7 @@ int menuPrincipal(int contBicicletas, int contEmprestimo, int contEspera, int co
     printf("\nNumero de emprestimos:%d",contEmprestimo);
     printf("\nQuantidade de pedidos na lista de espera:%d",contEspera);
     printf("\nDistancia total percorrida:%.2f",distTotPecorrida);
-    printf("\nQuantidade de bicicletas avariadas:",top2);
+    printf("\nQuantidade de bicicletas avariadas:%d",quantAvariadas);
     printf("\nNumero de bicicletas disponiveis:%d",bicicletasDisponiveis);
     printf("\n\n1->     Bicicletas\n");
     printf("2->     Utente\n");

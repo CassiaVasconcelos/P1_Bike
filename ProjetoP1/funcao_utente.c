@@ -56,7 +56,7 @@ int procurarUtente(tipoUtente Utente[],int codigo,int contUtente){
     int pos = -1;
     int i;
 
-    for(i=0;i<contUtente;++i){
+    for(i=0;i<contUtente;i++){
         if(Utente[i].numero == codigo){
             pos = i;
             break;
@@ -131,7 +131,7 @@ void consultarUtente(tipoUtente Utente[],int contUtente){
 void listarUtente(tipoUtente Utente[],int contUtente){
     int i;
 
-    for(i=0;i<contUtente;++i){
+    for(i=0;i<contUtente;i++){
         printf("\n\nNome Utente:%s",Utente[i].nome);
         printf("\nNumero Utente:%d",Utente[i].numero);
         printf("\nTelemovel Utente:%d",Utente[i].telemovel);

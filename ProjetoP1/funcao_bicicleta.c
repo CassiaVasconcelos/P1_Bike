@@ -9,39 +9,44 @@
 #include "constantes.h"
 #include "estruturas.h"
 
-void inserirBicicleta(tipoBicicleta bicicletas[],int *contBicicletas){
+void inserirBicicleta(tipoBicicleta bicicletas[],int *contBicicletas)
+{
     char designacao[MAXSTRING];
     int pos = -1;
     int opcao;
 
     printf("\n\nInserir Bicicleta   \n");
-    printf("\nInserir designacao da bicicleta:");
-    scanf("%s",&designacao);
+    printf("\nInserir ID da bicicleta:");
+    scanf("%s",designacao);
     limpaBufferStdin();
 
-    pos = procurarBicicleta(bicicletas,designacao,*contBicicletas);
+    pos = procurarBicicleta(bicicletas,&designacao,*contBicicletas);
 
-    if(pos != -1){
-        printf("\n\nJa existe uma bicicleta com essa designacao");
-    }else{
+    if(pos != -1)
+    {
+        printf("\n\nJa existe uma bicicleta com este ID");
+    }
+    else
+    {
         ///copia string origem para o vetor destino (incluindo \0)
-        strcpy(bicicletas[*contBicicletas].designacao,designacao); //salva a designacao da bike no vetor
+        strcpy(bicicletas[*contBicicletas].designacao,designacao); //salva a designacao da bicicleta no vetor
         strcpy(bicicletas[*contBicicletas].estado,"disponivel");    //"automaticamente" passa a estar disponivel
 
-       opcao = menuCampus();
+        opcao = menuCampus();        ///menu
 
-        switch(opcao){
-            case 1:
-                strcpy(bicicletas[*contBicicletas].campus,"residencias");
+        switch(opcao)
+        {
+        case 1:
+            strcpy(bicicletas[*contBicicletas].campus,"residencias");
             break;
-            case 2:
-                strcpy(bicicletas[*contBicicletas].campus,"campus 1");
+        case 2:
+            strcpy(bicicletas[*contBicicletas].campus,"campus 1");
             break;
-            case 3:
-                strcpy(bicicletas[*contBicicletas].campus,"campus 2");
+        case 3:
+            strcpy(bicicletas[*contBicicletas].campus,"campus 2");
             break;
-            case 4:
-                strcpy(bicicletas[*contBicicletas].campus,"campus 5");
+        case 4:
+            strcpy(bicicletas[*contBicicletas].campus,"campus 5");
             break;
         }
 
@@ -55,36 +60,42 @@ void inserirBicicleta(tipoBicicleta bicicletas[],int *contBicicletas){
     }
 }
 
-void consultarBicicleta(tipoBicicleta bicicletas[],int contBicicleta){
+void consultarBicicleta(tipoBicicleta bicicletas[],int contBicicleta)
+{
     char designacao[MAXSTRING];
     int pos = -1;
 
-    printf("\nInserir designacao da bicicleta:");
+    printf("\nInserir ID da bicicleta:");
     scanf("%s",&designacao);
 
     pos = procurarBicicleta(bicicletas,designacao,contBicicleta);
 
-    if(pos != -1){
+    if(pos != -1)
+    {
         printf("\n\nBicicleta Encontrada");
-        printf("\nDesignacao:%s",bicicletas[pos].designacao);
+        printf("\nID:%s",bicicletas[pos].designacao);
         printf("\nCampus:%s",bicicletas[pos].campus);
         printf("\nModelo:%s",bicicletas[pos].modelo);
         printf("\nEstado:%s",bicicletas[pos].estado);
         printf("\nQuantidade Avarias:%d",bicicletas[pos].quantidadeAvarias);
         printf("\nQuantidade Emprestimo:%d",bicicletas[pos].quantidadeEmprestimos);
         printf("\nDistancia percorrida:%d\n\n",bicicletas[pos].distanciaTotal);
-    }else{
+    }
+    else
+    {
         printf("\n\nNao existe nenhuma bicicleta com essa designacao\n");
     }
 
 }
 
-void listarBicicletas(tipoBicicleta bicicletas[],int contBicicleta){
+void listarBicicletas(tipoBicicleta bicicletas[],int contBicicleta)
+{
     int i,j = 1;
 
-    for(i = 0;i<contBicicleta;++i){
+    for(i = 0; i<contBicicleta; i++)
+    {
         printf("\n\nBicicleta:%d",j);
-        printf("\nDesignacao:%s",bicicletas[i].designacao);
+        printf("\nID:%s",bicicletas[i].designacao);
         printf("\nCampus:%s",bicicletas[i].campus);
         printf("\nModelo:%s",bicicletas[i].modelo);
         printf("\nEstado:%s",bicicletas[i].estado);
@@ -95,13 +106,16 @@ void listarBicicletas(tipoBicicleta bicicletas[],int contBicicleta){
     }
 }
 
-int procurarBicicleta(tipoBicicleta bicicletas[],char designacao[],int contBicicleta){
+int procurarBicicleta(tipoBicicleta bicicletas[],char designacao[],int contBicicleta)
+{
     int pos = -1;
     int i;
 
-    for(i=0;i<contBicicleta;++i){
-    ///compara alfabeticamente strings destino e origem, devolve 0 se iguais
-        if(strcmp(bicicletas[i].designacao,designacao)==0){//se forem iguais devolve 0, ja existe
+    for(i=0; i<contBicicleta; i++)
+    {
+        ///compara alfabeticamente strings destino e origem, devolve 0 se iguais
+        if(strcmp(bicicletas[i].designacao,designacao)==0) //se forem iguais devolve 0, ja existe
+        {
             pos = i;
             break;  ///
         }
@@ -110,15 +124,155 @@ int procurarBicicleta(tipoBicicleta bicicletas[],char designacao[],int contBicic
 }
 
 
-int bicicletasDisponiveis(tipoBicicleta bicicletas[], int *contBicicleta){
+int bicicletasDisponiveis(tipoBicicleta bicicletas[], int *contBicicleta)
+{
     int ocupadas=0, i=0;
 
-        for(i=0;i<*contBicicleta;++i){
-    ///compara alfabeticamente strings destino e origem, devolve 0 se iguais
-        if(strcmp(bicicletas[i].estado,"disponivel")!=0){//se forem iguais devolve 0, ja existe
+    for(i=0; i<*contBicicleta; i++)
+    {
+        ///compara alfabeticamente strings destino e origem, devolve 0 se iguais
+        if(strcmp(bicicletas[i].estado,"disponivel")!=0) //se forem iguais devolve 0, ja existe
+        {
             ocupadas++;
         }
     }
-
     return ocupadas;
+}
+
+//contbicicleta,
+
+void inserirAvaria(tipoBicicleta bicicletas[], int contBicicleta)
+{
+    char designacao[MAXSTRING];
+    int pos = -1;
+    char avaria[MAX];
+
+    printf("\nInserir ID da bicicleta:");
+    scanf("%s",&designacao);
+
+    pos = procurarBicicleta(bicicletas,designacao,contBicicleta);
+
+    if(pos != -1)
+    {
+        if(strcmp(bicicletas[pos].estado,"avariada")==0 || strcmp(bicicletas[pos].estado,"emprestada")==0)
+        {
+            printf("\n\nEsta bicicleta encontra-se avariada ou emprestada.");
+        }
+        else
+        {
+            strcpy(bicicletas[pos].estado, "avariada");
+
+
+        }
+    }
+    else
+    {
+        printf("\n\nNao existe nenhuma bicicleta com essa designacao\n");
+    }
+}
+
+void registarAvariaReparacao(tipoBicicleta bicicletas[], int contBicicleta,int *bicicletasOcupadas)
+{
+    char designacao[MAXSTRING];
+    int pos = -1;
+    int opcao;
+    FILE *file;
+    char causaAvaria[MAX];
+    tipoData data;
+
+    printf("\nInserir designacao da bicicleta:");
+    scanf("%s",&designacao);
+
+    pos = procurarBicicleta(bicicletas,designacao,contBicicleta);
+
+    if(pos != -1)
+    {
+        printf("\nEscolha a opcao pretendida");
+        printf("\n1->Avaria");
+        printf("\n2->Reparacao");
+        printf("\n3->Voltar");
+        opcao = lerInteiro("\nEscolhe uma opcao: ",1,3);
+
+        ///disponivel emprestada avariada
+        switch(opcao)
+        {
+        case 1:
+            ///avaria
+            if(strcmp(bicicletas[pos].estado,"disponivel")== 0)
+            {
+                strcpy(bicicletas[pos].estado,"avariada");
+                bicicletas[pos].quantidadeAvarias++;
+                lerString("\nIntroduza a causa da avaria da bicicleta:",causaAvaria,MAX);
+
+                data = lerData();
+                //comparar data, data>data.emprestimo e data<data.devolucao
+
+                ///TODO escrever para ficheiro texto um log
+                file = fopen("bicicletas.txt","a");
+
+                if (file == NULL)
+                {
+                    printf ("Erro abrir ficheiro");
+                }
+                else
+                {
+                    ///designação da bicicleta, distância total percorrida, data e hora da avaria, e descrição da avaria.
+                    fprintf(file,"Designacao bicicleta: %s\n",bicicletas[pos].designacao);
+                    fprintf(file,"Distancia total percorrida: %d\n",bicicletas[pos].distanciaTotal);
+                    fprintf(file,"Data da avaria: %02d/%02d/%d\t%02d:%02d\n",data.dia, data.mes, data.ano,data.hora,data.minuto);
+                    fprintf(file,"Causa da avaria: %s\n",causaAvaria);
+                    fprintf(file,"-----------------------------------------------------\n");
+                    fclose(file);
+                }
+                (*bicicletasOcupadas)++;
+
+            }
+            else
+            {
+                printf("\nA bicicleta com a designacao introduzida encontra-se avariada ou emprestada");
+            }
+            break;
+        case 2:
+            ///reparacao
+            if(strcmp(bicicletas[pos].estado,"avariada")!= 0)
+            {
+                printf("\nA bicicleta nao se encontra avariada para realizar uma reparacao");
+            }
+            else
+            {
+                strcpy(bicicletas[pos].estado,"disponivel");
+                (*bicicletasOcupadas)--;
+                printf("\n\nA bicicleta foi reparada!");
+            }
+            break;
+        }
+    }
+    else
+    {
+        printf("\nA bicicleta com a designacao introduzida nao existe");
+    }
+}
+
+float atualizarDistanciaTotal(tipoBicicleta bicicleta[],int contBicicletas)
+{
+    int i;
+    float distancia=0;
+
+    for (i=0; i<contBicicletas; i++)
+    {
+        distancia = distancia + bicicleta[i].distanciaTotal;
+    }
+    return distancia;
+}
+
+int atualizarNumeroBicicletasAvariadas(tipoBicicleta bicicletas[],int contBicicletas){
+    int i, numeroAvarias=0;
+
+    for(i=0; i<contBicicletas; i++){
+        if(strcmp(bicicletas[i].estado,"avariada")==0) //se forem iguais devolve 0, ja existe
+        {
+            numeroAvarias++;
+        }
+    }
+    return numeroAvarias;
 }
