@@ -43,7 +43,10 @@ typedef struct{
 }tipoEmprestimo;
 
 typedef struct{
-    tipoEmprestimo emprestimo;
+    int codigoUtente;
+    tipoData dataRegistro; //tipoData dataEmprestimo;
+    char campusOrigem[MAXSTRING];
+    char campusDestino[MAXSTRING];
 }tipoEspera;
 
 #endif // ESTRUTURAS_H_INCLUDED

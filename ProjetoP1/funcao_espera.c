@@ -22,7 +22,7 @@ tipoEspera *registrarEspera(tipoEspera espera[],tipoUtente utente[],int *contEsp
     tipoEspera *aux;
     aux = espera;  ///add
     int esperaRealizada=0,naoDisponivel=0;
-    int flag =0;
+    int flag = 1;
 
     codigo = lerInteiro("\nIntroduza o numero de utente:",0,MAXNUMEROUTENTE);
 
@@ -37,9 +37,9 @@ tipoEspera *registrarEspera(tipoEspera espera[],tipoUtente utente[],int *contEsp
     {
         for(i=0 ; i<*contEspera ; i++)
         {
-            if(codigo == espera[i].emprestimo.codigoUtente)
+            if(codigo == espera[i].codigoUtente)
             {
-            //    printf("\nO utente ja se encontra na lista de espera, aguarde sua vez! ");
+                //    printf("\nO utente ja se encontra na lista de espera, aguarde sua vez! ");
                 flag = 0;
             }
             else
@@ -67,21 +67,51 @@ tipoEspera *registrarEspera(tipoEspera espera[],tipoUtente utente[],int *contEsp
                 switch(opcao)
                 {
                 case 1:
-                    strcpy(aux[*contEspera].emprestimo.campusOrigem,"residencias");
+                    strcpy(aux[*contEspera].campusOrigem,"residencias");
                     break;
                 case 2:
-                    strcpy(aux[*contEspera].emprestimo.campusOrigem,"campus 1");
+                    strcpy(aux[*contEspera].campusOrigem,"campus 1");
                     break;
                 case 3:
-                    strcpy(aux[*contEspera].emprestimo.campusOrigem,"campus 2");
+                    strcpy(aux[*contEspera].campusOrigem,"campus 2");
                     break;
                 case 4:
-                    strcpy(aux[*contEspera].emprestimo.campusOrigem,"campus 5");
+                    strcpy(aux[*contEspera].campusOrigem,"campus 5");
                     break;
                 }
 
+                aux[*contEspera].dataRegistro = lerData();
+                aux[*contEspera].codigoUtente = codigo;
 
+                opcao = menuCampus();   ///menu
+
+
+                switch(opcao)
+                {
+                case 1:
+                    strcpy(campus,"residencias");
+                    break;
+                case 2:
+                    strcpy(campus,"campus 1");
+                    break;
+                case 3:
+                    strcpy(campus,"campus 2");
+                    break;
+                case 4:
+                    strcpy(campus,"campus 5");
+                    break;
+                }
+            }
+
+            if(strcmp(aux[*contEspera].campusOrigem,campus)==0)
+            {
+                printf("Insira outro local para deixar a bicicleta");
+            }
+            else
+            {
+                (*contEspera)++;
             }
         }
     }
+    return aux;
 }

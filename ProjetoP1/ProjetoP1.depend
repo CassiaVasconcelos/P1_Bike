@@ -96,7 +96,7 @@
 
 1547250095 c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\constantes.h
 
-1547244730 c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\estruturas.h
+1547251304 c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\estruturas.h
 	"constantes.h"
 	"declaracoes_funcoes.h"
 
@@ -144,7 +144,7 @@
 	"constantes.h"
 	"estruturas.h"
 
-1547244796 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\main.c
+1547250095 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\main.c
 	<stdio.h>
 	<string.h>
 	<ctype.h>
@@ -166,7 +166,7 @@
 	"constantes.h"
 	"estruturas.h"
 
-1547244730 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\funcao_espera.c
+1547251724 source:c:\users\cássia\desktop\projecto_p1\iplprog1\projetop1\funcao_espera.c
 	<stdio.h>
 	<string.h>
 	<ctype.h>
