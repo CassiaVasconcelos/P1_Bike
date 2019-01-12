@@ -43,6 +43,9 @@
 		<Unit filename="funcao_emprestimo.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="funcao_espera.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="funcao_ficheiro.c">
 			<Option compilerVar="CC" />
 		</Unit>

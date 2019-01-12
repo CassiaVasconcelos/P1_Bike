@@ -27,7 +27,7 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
 
     if(pos == -1)
     {
-        printf("\nNao existe nenhum utente com esse numero");
+        printf("\nNao existe nenhum utente com este numero!");
     }
     else
     {
@@ -48,6 +48,7 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
         }
         else
         {
+            printf("\nInsira o campus de origem que deseja:");
             opcao = menuCampus();
 
             switch(opcao)
@@ -89,6 +90,8 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
                             aux[*contEmprestimo].dataEmprestimo = lerData();
                             strcpy(aux[*contEmprestimo].campusOrigem,campus);
 
+
+                            printf("\nInsira o campus de destino que deseja:");
                             opcao = menuCampus();   ///menu
 
 
@@ -110,7 +113,7 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
                         }
                         if(strcmp(aux[*contEmprestimo].campusOrigem,campus)==0)
                         {
-                            printf("Insira outro local para deixar a bicicleta");
+                            printf("Mesmo campus de origem e destino, tente novamente inserindo locais diferentes para a bicicleta");
                         }
                         else
                         {
@@ -129,8 +132,6 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
                         }
                         //tipoData dataDevolucao;
                         //int distanciaPercorrida;
-
-
                     }
                     else
                     {
@@ -138,7 +139,6 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
                         (*verPossibEmprestimo)=0;
 
                     }
-
                 }
                 else
                 {

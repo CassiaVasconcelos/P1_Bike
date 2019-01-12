@@ -18,7 +18,8 @@ char menuUtente(int contUtente);
 char menuEmprestimo(int bicicletasOcupadas);
 int menuCampus();
 int subMenuTipoUtente();
-int menuEspera(int contadorEspera);
+//int menuEspera(int contadorEspera);
+char menuEspera(int numeroDeEsperas);
 
 //bicicletas
 void inserirBicicleta(tipoBicicleta bicicletas[],int *contBicicletas);
@@ -45,6 +46,8 @@ void lerFicheiroBinUtente(tipoUtente utente[MAXUTENTE], int *contUtente);
 void escreverFicheiroBinUtente(tipoUtente utente[MAXUTENTE], int contUtente);
 tipoEmprestimo *lerFicheiroBinEmprestimo(tipoEmprestimo emprestimo[], int *contEmprestimo);
 void escreverFicheiroBinEmprestimo(tipoEmprestimo emprestimo[], int contEmprestimo);
+tipoEmprestimo *lerFicheiroBinEspera(tipoEspera espera[], int *contEspera);
+void escreverFicheiroBinEspera(tipoEspera espera[], int contEspera);
 
 //utentes
 void inserirUtente(tipoUtente Utente[],int *contUtente);

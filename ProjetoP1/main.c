@@ -17,7 +17,7 @@ int main()
     float distTotPecorrida=0.;
     int verPossibEmprestimo=0;
 
-  //  tipoData data;
+    //  tipoData data;
     tipoBicicleta bicicleta[MAXBICICLETA];
     tipoUtente utente[MAXUTENTE];
     tipoEmprestimo *emprestimo;
@@ -28,11 +28,13 @@ int main()
 
     lerFicheiroBinBicicleta(bicicleta,&contBicicletas);
     lerFicheiroBinUtente(utente,&contUtente);
+    lerFicheiroBinEspera(espera,&contEspera);
 
     emprestimo = lerFicheiroBinEmprestimo(emprestimo,&contEmprestimo);
 
 
-    if(quantEmprestimos!=0){
+    if(quantEmprestimos!=0)
+    {
         idEmprestimo=quantEmprestimos+1;
         //printf("idEmprestimo: %d", idEmprestimo);
     }
@@ -100,6 +102,17 @@ int main()
             break;
         case 3:
             opcEspera = menuEspera(contEspera);
+            switch(opcEspera)
+            {
+            case 'A'://alterar campus de destino
+                break;
+            case 'E':
+                break;
+            case 'C':
+                break;
+            case 'L':
+                break;
+            }
             break;
         case 4:
             opcEmprestimo = menuEmprestimo(bicicletasOcupadas);
@@ -107,7 +120,8 @@ int main()
             {
             case 'R':
                 emprestimo = registarEmprestimo(bicicleta,utente,emprestimo,contBicicletas,contUtente,&contEmprestimo,&idEmprestimo,&bicicletasOcupadas,&verPossibEmprestimo);
-                if(verPossibEmprestimo==0){
+                if(verPossibEmprestimo==0)
+                {
                     printf("\nInfelizmente nao ha bicicletas disponiveis, voce sera colocado na lista de espera!");
                     espera = registrarEspera(espera,utente,&contEspera,contUtente);
                 }
@@ -150,7 +164,10 @@ int main()
     escreverFicheiroBinBicicleta(bicicleta,contBicicletas);//salvar
     escreverFicheiroBinUtente(utente,contUtente);//salvar
     escreverFicheiroBinEmprestimo(emprestimo,contEmprestimo);
+    escreverFicheiroBinEspera(espera,contEspera);
+
     free(emprestimo);
+    free(espera);
 
     return 0;
 }

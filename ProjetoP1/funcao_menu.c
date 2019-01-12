@@ -81,7 +81,7 @@ char menuEmprestimo(int bicicletasOcupadas){
     char opcao;
 
     do{
-        printf("\nNumero de bicicletas disponiveis:%i", bicicletasDisponiveis);
+        printf("\nNumero de bicicletas disponiveis:%d", bicicletasDisponiveis);
         printf("\n\n     (R)egistar\n");
         printf("     (D)evolucao\n");
         printf("     (C)onsultar\n");
@@ -100,7 +100,7 @@ char menuEmprestimo(int bicicletasOcupadas){
 int menuCampus(){
         int opcao;
 
-        printf("\n\nInsira o campus da bicicleta:");
+ //       printf("\n\nInsira o campus da bicicleta:");
         printf("\n1->Residencias");
         printf("\n2->Campus 1");
         printf("\n3->Campus 2");
@@ -122,7 +122,7 @@ int subMenuTipoUtente(){
 
         return opcao;
 }
-
+/*
 int menuEspera(int contadorEspera){
         int opcao;
 
@@ -135,4 +135,28 @@ int menuEspera(int contadorEspera){
 
         return opcao;
 }
+*/
 
+char menuEspera(int numeroDeEsperas){
+//    int bicicletasEspera = MAXBICICLETA - numeroDeEsperas;
+    char opcoes[] = "AECLV";
+    char opcao;
+
+    do{
+        printf("\nNumero de utentes em espera:%d", numeroDeEsperas);
+ //       printf("\n\n     (R)egistar\n");
+        printf("\n\n\t(A)lterar campus de destino\n");
+        printf("\t(E)liminar da lista\n");
+        printf("\t(C)onsultar\n");
+        printf("\t(L)istar\n");
+        printf("\t(V)oltar\n");
+        printf("\tEscolha uma opcao: ");
+        scanf(" %c", &opcao);
+        limpaBufferStdin();
+        opcao = toupper(opcao);
+
+    }
+    while (strchr(opcoes, opcao)==NULL);
+
+    return opcao;
+}

@@ -139,3 +139,58 @@ void escreverFicheiroBinEmprestimo(tipoEmprestimo emprestimo[], int contEmpresti
         printf("\nFicheiro emprestimos exportado com sucesso\n\n");
     }
 }
+
+tipoEmprestimo *lerFicheiroBinEspera(tipoEspera espera[], int *contEspera)
+{
+    FILE *ficheiro;
+    tipoEspera *aux;
+    aux = NULL;
+    ficheiro=fopen("esperas.dat","rb");
+    if (ficheiro == NULL)
+    {
+        printf ("Erro abrir ficheiro espera");
+    }
+    else
+    {
+        fread(contEspera,sizeof(int),1,ficheiro);
+
+        aux = realloc(aux,(*contEspera)*sizeof(tipoEspera));
+
+        if(aux ==NULL && *contEspera != 0)
+        {
+            printf("\nErro ao alocar memoria");
+            *contEspera = 0;
+        }
+        else
+        {
+            fread(aux,sizeof(tipoEspera),*contEspera,ficheiro); //add
+           // fread(emprestimo,sizeof(tipoEmprestimo),contEmprestimo,ficheiro);
+        }
+
+    }
+
+    return aux;
+}
+
+void escreverFicheiroBinEspera(tipoEspera espera[], int contEspera)
+{
+    if (contEspera==0)
+    {
+        printf("Nao existem esperas em registro\n");
+    }
+    FILE *ficheiro;
+
+    ficheiro=fopen("esperas.dat","wb");
+    if(ficheiro==NULL)
+    {
+        printf("Erro de abertura esperas");
+    }
+    else
+    {
+        fwrite(&contEspera,sizeof(int),1,ficheiro);
+        fwrite(espera,sizeof(tipoEspera),contEspera,ficheiro);
+
+        fclose(ficheiro);
+        printf("\nFicheiro espera exportado com sucesso\n\n");
+    }
+}

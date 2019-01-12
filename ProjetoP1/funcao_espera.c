@@ -62,6 +62,8 @@ tipoEspera *registrarEspera(tipoEspera espera[],tipoUtente utente[],int *contEsp
             }
             else
             {
+
+                printf("\nInsira o campus de origem que deseja:");
                 opcao = menuCampus();
 
                 switch(opcao)
@@ -83,6 +85,8 @@ tipoEspera *registrarEspera(tipoEspera espera[],tipoUtente utente[],int *contEsp
                 aux[*contEspera].dataRegistro = lerData();
                 aux[*contEspera].codigoUtente = codigo;
 
+
+                printf("\nInsira o campus de destino que deseja:");
                 opcao = menuCampus();   ///menu
 
 
