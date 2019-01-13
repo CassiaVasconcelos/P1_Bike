@@ -188,7 +188,14 @@ int main()
         case 6:
             break;
         case 7:
+            if(contEmprestimo == 0)
+            {
+                printf("\nAinda nao foram efetuados qualquer emprestimo");
+            }
+            else
+            {
             listarDadosEmprestimoUtente(bicicleta,utente,emprestimo,contBicicletas,contUtente,contEmprestimo);
+            }
             break;
         }
     }

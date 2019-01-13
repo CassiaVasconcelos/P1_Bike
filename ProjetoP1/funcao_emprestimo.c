@@ -165,7 +165,7 @@ void consultarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmpr
     int i;
     int j = 1;
 
-    numeroUtente = lerInteiro("\nInsira o numero de utente que quer consultar os emprestimo:",1,MAXNUMEROUTENTE);
+    numeroUtente = lerInteiro("\nInsira o numero de utente que quer consultar os emprestimo:",0,MAXNUMEROUTENTE);
 
     pos = procurarUtente(utentes,numeroUtente,contUtentes);
 

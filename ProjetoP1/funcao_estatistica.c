@@ -69,7 +69,7 @@ void listarUtentesPorNumeroDecrescenteDeEmprestimos(tipoUtente utentes[],tipoEmp
         j++;
     }
 }
-
+/*
 void listarDadosEmprestimoUtente(tipoBicicleta bicicletas[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo)
 {
     int pos = -1;
@@ -112,11 +112,11 @@ void listarDadosEmprestimoUtente(tipoBicicleta bicicletas[],tipoUtente utentes[]
 
             for(i=0; i<contEmprestimo; ++i)
             {
-                if(emprestimos[i].codigoUtente==codigo)
-                {
-           /*         if(emprestimos[i].dataEmprestimo){
+              //  if(emprestimos[i].codigoUtente==codigo)
+              //  {
+              //      if(emprestimos[i].dataEmprestimo){
 
-                    }*/
+                //    }
                 }
             }
 
@@ -132,5 +132,335 @@ void listarDadosEmprestimoUtente(tipoBicicleta bicicletas[],tipoUtente utentes[]
         }
 
 
+}*/
+///apagar depois
+
+/*
+void listarDadosEmprestimoUtente(tipoBicicleta bicicletas[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo)
+{
+    int pos = -1;
+    int codigo;
+    int i;
+    int opcao;
+    int j = 1;
+    int posUltimaBicicleta = -1;
+
+    codigo = lerInteiro("\nInsira o numero de utente que saber os dados:",0,MAXNUMEROUTENTE);
+
+    pos = procurarUtente(utentes,codigo,contUtentes);
+
+    if(pos != -1)
+    {
+        printf("\n\t\tHistorico emprestimo do utente com a designacao selecionada");
+        for(i=0; i<contEmprestimo; ++i)
+        {
+            if(emprestimos[i].codigoUtente == utentes[pos].numero)
+            {
+                printf("\nEmprestimo %d",j);
+                printf("\nNumero de registo:%d",emprestimos[i].numeroRegisto);
+                printf("\nCodigo de utente:%d\t\tNome Utente:%s",emprestimos[i].codigoUtente,utentes[pos].nome);
+                printf("\nDesignacao da bicicleta:%s",emprestimos[i].designacaoBicicleta);
+                printf("\nCampus Origem:%s",emprestimos[i].campusOrigem);
+                printf("\nCampus destino:%s",emprestimos[i].campusDestino);
+                printf("\nData de emprestimo:%d-%d-%d\t\t%d:%d",emprestimos[i].dataEmprestimo.dia,emprestimos[i].dataEmprestimo.mes,emprestimos[i].dataEmprestimo.ano,
+                       emprestimos[i].dataEmprestimo.hora,emprestimos[i].dataEmprestimo.minuto);
+                printf("\nData de devolucao:%d-%d-%d\t\t%d:%d",emprestimos[i].dataDevolucao.dia,emprestimos[i].dataDevolucao.mes,emprestimos[i].dataDevolucao.ano,
+                       emprestimos[i].dataDevolucao.hora,emprestimos[i].dataDevolucao.minuto);
+                printf("\nDistancia percorrida:%f",emprestimos[i].distanciaPercorrida);
+                j++;
+            }
+        }
+
+        for(i=0; i<contEmprestimo-1; i++)
+        {
+            for(j=i+1; j<contEmprestimo; j++)
+            {
+                if(emprestimos[i].codigoUtente==codigo && emprestimos[j].codigoUtente==codigo)
+                {
+                    //verificar maior data
+                    if(emprestimos[i].dataDevolucao.ano < emprestimos[j].dataDevolucao.ano)
+                    {
+                        posUltimaBicicleta=j;
+                    }
+                    else
+                    {
+                        if(emprestimos[i].dataDevolucao.ano > emprestimos[j].dataDevolucao.ano)
+                        {
+                            posUltimaBicicleta=i;
+                        }
+                        else
+                        {
+                            ///anos iguais
+                            if(emprestimos[i].dataDevolucao.mes < emprestimos[j].dataDevolucao.mes)
+                            {
+                                posUltimaBicicleta=j;
+                            }
+                            else
+                            {
+                                if(emprestimos[i].dataDevolucao.mes > emprestimos[j].dataDevolucao.mes)
+                                {
+                                    posUltimaBicicleta=i;
+                                }
+                                else
+                                {
+                                    ///meses iguais
+                                    if(emprestimos[i].dataDevolucao.dia < emprestimos[j].dataDevolucao.dia)
+                                    {
+                                        posUltimaBicicleta = j;
+                                    }
+                                    else
+                                    {
+                                        if(emprestimos[i].dataDevolucao.dia > emprestimos[j].dataDevolucao.dia)
+                                        {
+                                            posUltimaBicicleta = i;
+                                        }
+                                        else
+                                        {
+                                            ///dias iguais
+
+                                            if(emprestimos[i].dataDevolucao.hora < emprestimos[j].dataDevolucao.hora)
+                                            {
+                                                posUltimaBicicleta=j;
+                                            }
+                                            else
+                                            {
+                                                if(emprestimos[i].dataDevolucao.hora > emprestimos[j].dataDevolucao.hora)
+                                                {
+                                                    posUltimaBicicleta=i;
+                                                }
+                                                else
+                                                {
+                                                    ///horas iguais
+
+                                                    if(emprestimos[i].dataDevolucao.minuto < emprestimos[j].dataDevolucao.minuto)
+                                                    {
+                                                        posUltimaBicicleta=j;
+                                                    }
+                                                    else
+                                                    {
+                                                        if(emprestimos[i].dataDevolucao.minuto > emprestimos[j].dataDevolucao.minuto)
+                                                        {
+                                                            posUltimaBicicleta=i;
+                                                        }
+                                                        else
+                                                        {
+                                                            ///minutos iguais tanto faz porque as datas sao iguais
+                                                            posUltimaBicicleta=i;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if(posUltimaBicicleta == i )
+        {
+            printf("\n\nDados da ultima bicicleta emprestado ao utilizador selecionado\n");
+            printf("\nDesignacao:%s",bicicletas[posUltimaBicicleta].designacao);
+            printf("\nCampus:%s",bicicletas[posUltimaBicicleta].campus);
+            printf("\nModelo:%s",bicicletas[posUltimaBicicleta].modelo);
+            printf("\nEstado:%s",bicicletas[posUltimaBicicleta].estado);
+            printf("\nQuantidade Avarias:%d",bicicletas[posUltimaBicicleta].quantidadeAvarias);
+            printf("\nQuantidade Emprestimo:%d",bicicletas[posUltimaBicicleta].quantidadeEmprestimos);
+            printf("\nDistancia percorrida:%f",bicicletas[posUltimaBicicleta].distanciaTotal);
+        }
+
+    }
+    else
+    {
+        printf("\nO utente nao existe");
+    }
 }
 
+*/
+
+
+void listarDadosEmprestimoUtente(tipoBicicleta bicicletas[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo)
+{
+    int pos = -1;
+    int codigo;
+    int i;
+    int opcao;
+    int j = 1;
+    int posUltimaBicicleta = -1;
+    int aux=0;
+    int naoExisteEmprestimoDoUtente=0;
+
+    codigo = lerInteiro("\nInsira o numero de utente que saber os dados:",0,MAXNUMEROUTENTE);
+
+    pos = procurarUtente(utentes,codigo,contUtentes);
+
+    if(pos == -1)
+    {
+        printf("\nO utente nao existe");
+    }
+    else
+    {
+        for(i=0; i<contEmprestimo; ++i)
+        {
+            if(emprestimos[i].codigoUtente == utentes[pos].numero)
+            {
+                printf("\n\n\t\tEmprestimo do utente com a designacao selecionada");
+                printf("\nEmprestimo %d",j);
+                printf("\nNumero de registo:%d",emprestimos[i].numeroRegisto);
+                printf("\nCodigo de utente:%d\t\tNome Utente:%s",emprestimos[i].codigoUtente,utentes[pos].nome);
+                printf("\nDesignacao da bicicleta:%s",emprestimos[i].designacaoBicicleta);
+                printf("\nCampus Origem:%s",emprestimos[i].campusOrigem);
+                printf("\nCampus destino:%s",emprestimos[i].campusDestino);
+                printf("\nData de emprestimo:%02d-%02d-%04d\t\t%02d:%02d",emprestimos[i].dataEmprestimo.dia,emprestimos[i].dataEmprestimo.mes,emprestimos[i].dataEmprestimo.ano,
+                       emprestimos[i].dataEmprestimo.hora,emprestimos[i].dataEmprestimo.minuto);
+                printf("\nData de devolucao:%d-%d-%d\t\t%d:%d",emprestimos[i].dataDevolucao.dia,emprestimos[i].dataDevolucao.mes,emprestimos[i].dataDevolucao.ano,
+                       emprestimos[i].dataDevolucao.hora,emprestimos[i].dataDevolucao.minuto);
+                printf("\nDistancia percorrida:%.2f",emprestimos[i].distanciaPercorrida);
+                j++;
+            }else{
+
+            naoExisteEmprestimoDoUtente = 1;
+            }
+        }
+
+        for(i=0; i<contEmprestimo-1; i++)
+        {
+            if(emprestimos[i].codigoUtente==codigo)
+            {
+                aux++;
+            }
+        }
+
+        if(aux == 1)
+        {
+            for(i=0; i<contEmprestimo-1; i++)
+            {
+                if(emprestimos[i].codigoUtente==codigo)
+                {
+                    aux++;
+                    printf("\n\nDados da ultima bicicleta emprestado ao utilizador selecionado\n");
+                    printf("\nDesignacao:%s",bicicletas[i].designacao);
+                    printf("\nCampus:%s",bicicletas[i].campus);
+                    printf("\nModelo:%s",bicicletas[i].modelo);
+                    printf("\nEstado:%s",bicicletas[i].estado);
+                    printf("\nQuantidade Avarias:%d",bicicletas[i].quantidadeAvarias);
+                    printf("\nQuantidade Emprestimo:%d",bicicletas[i].quantidadeEmprestimos);
+                    printf("\nDistancia percorrida:%.2f",bicicletas[i].distanciaTotal);
+                }
+            }
+        }
+        else
+        {
+            for(i=0; i<contEmprestimo-1; i++)
+            {
+                for(j=i+1; j<contEmprestimo; j++)
+                {
+                    if(emprestimos[i].codigoUtente==codigo && emprestimos[j].codigoUtente==codigo)
+                    {
+                        //verificar maior data
+                        if(emprestimos[i].dataDevolucao.ano < emprestimos[j].dataDevolucao.ano)
+                        {
+                            posUltimaBicicleta=j;
+                        }
+                        else
+                        {
+                            if(emprestimos[i].dataDevolucao.ano > emprestimos[j].dataDevolucao.ano)
+                            {
+                                posUltimaBicicleta=i;
+                            }
+                            else
+                            {
+                                ///anos iguais
+                                if(emprestimos[i].dataDevolucao.mes < emprestimos[j].dataDevolucao.mes)
+                                {
+                                    posUltimaBicicleta=j;
+                                }
+                                else
+                                {
+                                    if(emprestimos[i].dataDevolucao.mes > emprestimos[j].dataDevolucao.mes)
+                                    {
+                                        posUltimaBicicleta=i;
+                                    }
+                                    else
+                                    {
+                                        ///meses iguais
+                                        if(emprestimos[i].dataDevolucao.dia < emprestimos[j].dataDevolucao.dia)
+                                        {
+                                            posUltimaBicicleta = j;
+                                        }
+                                        else
+                                        {
+                                            if(emprestimos[i].dataDevolucao.dia > emprestimos[j].dataDevolucao.dia)
+                                            {
+                                                posUltimaBicicleta = i;
+                                            }
+                                            else
+                                            {
+                                                ///dias iguais
+
+                                                if(emprestimos[i].dataDevolucao.hora < emprestimos[j].dataDevolucao.hora)
+                                                {
+                                                    posUltimaBicicleta=j;
+                                                }
+                                                else
+                                                {
+                                                    if(emprestimos[i].dataDevolucao.hora > emprestimos[j].dataDevolucao.hora)
+                                                    {
+                                                        posUltimaBicicleta=i;
+                                                    }
+                                                    else
+                                                    {
+                                                        ///horas iguais
+
+                                                        if(emprestimos[i].dataDevolucao.minuto < emprestimos[j].dataDevolucao.minuto)
+                                                        {
+                                                            posUltimaBicicleta=j;
+                                                        }
+                                                        else
+                                                        {
+                                                            if(emprestimos[i].dataDevolucao.minuto > emprestimos[j].dataDevolucao.minuto)
+                                                            {
+                                                                posUltimaBicicleta=i;
+                                                            }
+                                                            else
+                                                            {
+                                                                ///minutos iguais tanto faz porque as datas sao iguais
+                                                                posUltimaBicicleta=i;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            if(naoExisteEmprestimoDoUtente==0){
+            printf("\n\nDados da ultima bicicleta emprestado ao utilizador selecionado\n");
+            printf("\nDesignacao:%s",bicicletas[posUltimaBicicleta].designacao);
+            printf("\nCampus:%s",bicicletas[posUltimaBicicleta].campus);
+            printf("\nModelo:%s",bicicletas[posUltimaBicicleta].modelo);
+            printf("\nEstado:%s",bicicletas[posUltimaBicicleta].estado);
+            printf("\nQuantidade Avarias:%d",bicicletas[posUltimaBicicleta].quantidadeAvarias);
+            printf("\nQuantidade Emprestimo:%d",bicicletas[posUltimaBicicleta].quantidadeEmprestimos);
+            printf("\nDistancia percorrida:%.2f",bicicletas[posUltimaBicicleta].distanciaTotal);
+            }else{
+            printf("\nO utente nao possui emprestimo");
+            }
+
+        }
+    }
+
+
+}

@@ -15,7 +15,7 @@ void lerFicheiroBinBicicleta(tipoBicicleta bicicleta[MAXBICICLETA], int *contBic
     ficheiro=fopen("bicicletas.dat","rb");
     if (ficheiro == NULL)
     {
-        printf ("Erro abrir ficheiro bicicleta");
+        printf ("\nErro abrir ficheiro bicicleta");
     }
     else
     {
@@ -28,14 +28,14 @@ void escreverFicheiroBinBicicleta(tipoBicicleta bicicleta[MAXBICICLETA], int con
 {
     if (contBicicletas==0)
     {
-        printf("Nao existem bicicletas em registro\n");
+        printf("\n\nNao existem bicicletas em registro");
     }
     FILE *ficheiro;
 
     ficheiro=fopen("bicicletas.dat","wb");
     if(ficheiro==NULL)
     {
-        printf("Erro de abertura bicicleta");
+        printf("\nErro de abertura bicicleta");
     }
     else
     {
@@ -43,7 +43,7 @@ void escreverFicheiroBinBicicleta(tipoBicicleta bicicleta[MAXBICICLETA], int con
         fwrite(bicicleta,sizeof(tipoBicicleta),MAXBICICLETA,ficheiro);
 
         fclose(ficheiro);
-        printf("\nFicheiro bicicletas exportado com sucesso\n\n");
+        printf("\nFicheiro bicicletas exportado com sucesso");
     }
 }
 
@@ -53,7 +53,7 @@ void lerFicheiroBinUtente(tipoUtente utente[MAXUTENTE], int *contUtente)
     ficheiro=fopen("utentes.dat","rb");
     if (ficheiro == NULL)
     {
-        printf ("Erro abrir ficheiro utente");
+        printf ("\nErro abrir ficheiro utente");
     }
     else
     {
@@ -66,14 +66,14 @@ void escreverFicheiroBinUtente(tipoUtente utente[MAXUTENTE], int contUtente)
 {
     if (contUtente==0)
     {
-        printf("Nao existem utentes em registro\n");
+        printf("\n\nNao existem utentes em registro");
     }
     FILE *ficheiro;
 
     ficheiro=fopen("utentes.dat","wb");
     if(ficheiro==NULL)
     {
-        printf("Erro de abertura utente");
+        printf("\nErro de abertura utente");
     }
     else
     {
@@ -81,7 +81,7 @@ void escreverFicheiroBinUtente(tipoUtente utente[MAXUTENTE], int contUtente)
         fwrite(utente,sizeof(tipoUtente),MAXUTENTE,ficheiro);
 
         fclose(ficheiro);
-        printf("\nFicheiro utentes exportado com sucesso\n\n");
+        printf("\nFicheiro utentes exportado com sucesso");
     }
 }
 
@@ -93,7 +93,7 @@ tipoEmprestimo *lerFicheiroBinEmprestimo(tipoEmprestimo emprestimo[], int *contE
     ficheiro=fopen("emprestimos.dat","rb");
     if (ficheiro == NULL)
     {
-        printf ("Erro abrir ficheiro emprestimo");
+        printf ("\nErro abrir ficheiro emprestimo");
     }
     else
     {
@@ -108,8 +108,7 @@ tipoEmprestimo *lerFicheiroBinEmprestimo(tipoEmprestimo emprestimo[], int *contE
         }
         else
         {
-            fread(aux,sizeof(tipoEmprestimo),*contEmprestimo,ficheiro); //add
-           // fread(emprestimo,sizeof(tipoEmprestimo),contEmprestimo,ficheiro);
+            fread(aux,sizeof(tipoEmprestimo),*contEmprestimo,ficheiro);
         }
 
     }
@@ -121,14 +120,14 @@ void escreverFicheiroBinEmprestimo(tipoEmprestimo emprestimo[], int contEmpresti
 {
     if (contEmprestimo==0)
     {
-        printf("Nao existem emprestimos em registro\n");
+        printf("\n\nNao existem emprestimos em registro");
     }
     FILE *ficheiro;
 
     ficheiro=fopen("emprestimos.dat","wb");
     if(ficheiro==NULL)
     {
-        printf("Erro de abertura emprestimos");
+        printf("\nErro de abertura emprestimos");
     }
     else
     {
@@ -136,7 +135,7 @@ void escreverFicheiroBinEmprestimo(tipoEmprestimo emprestimo[], int contEmpresti
         fwrite(emprestimo,sizeof(tipoEmprestimo),contEmprestimo,ficheiro);
 
         fclose(ficheiro);
-        printf("\nFicheiro emprestimos exportado com sucesso\n\n");
+        printf("\nFicheiro emprestimos exportado com sucesso");
     }
 }
 
@@ -148,7 +147,7 @@ tipoEspera *lerFicheiroBinEspera(tipoEspera espera[], int *contEspera)
     ficheiro=fopen("esperas.dat","rb");
     if (ficheiro == NULL)
     {
-        printf ("Erro abrir ficheiro espera");
+        printf ("\nErro abrir ficheiro espera");
     }
     else
     {
@@ -175,14 +174,14 @@ void escreverFicheiroBinEspera(tipoEspera espera[], int contEspera)
 {
     if (contEspera==0)
     {
-        printf("Nao existem esperas em registro\n");
+        printf("\n\nNao existem esperas em registro");
     }
     FILE *ficheiro;
 
     ficheiro=fopen("esperas.dat","wb");
     if(ficheiro==NULL)
     {
-        printf("Erro de abertura esperas");
+        printf("\nErro de abertura esperas");
     }
     else
     {
@@ -190,30 +189,6 @@ void escreverFicheiroBinEspera(tipoEspera espera[], int contEspera)
         fwrite(espera,sizeof(tipoEspera),contEspera,ficheiro);
 
         fclose(ficheiro);
-        printf("\nFicheiro espera exportado com sucesso\n\n");
+        printf("\nFicheiro espera exportado com sucesso");
     }
 }
-/*
-void escreverFicheiroBinEspera(tipoEspera espera[], int contEspera)
-{
-    if (contEspera==0)
-    {
-        printf("Nao existem esperas em registro\n");
-    }
-    FILE *ficheiro;
-
-    ficheiro=fopen("esperas.dat","wb");
-    if(ficheiro==NULL)
-    {
-        printf("Erro de abertura espera");
-    }
-    else
-    {
-        fwrite(&contEspera,sizeof(int),1,ficheiro);
-        fwrite(espera,sizeof(tipoEspera),contEspera,ficheiro);
-
-        fclose(ficheiro);
-        printf("\nFicheiro espera exportado com sucesso\n\n");
-    }
-}
-*/
