@@ -125,7 +125,7 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
                             (*contEmprestimo)++;
                             (*idEmprestimo)++;
                             (*bicicletasOcupadas)++;
-                            (*verPossibEmprestimo)=1;
+                            (*verPossibEmprestimo)=1;//foi possivel fazer o emprestimo
 
                             break;
 
@@ -149,6 +149,7 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
             if(naoDisponivel==1)
             {
                 printf("\nNao ha bicicletas disponiveis no campus selecionado.");
+                (*verPossibEmprestimo)=0;
             }
         }
     }
@@ -198,11 +199,7 @@ void consultarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmpr
 
 void listarEmprestimos(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo)
 {
-    int numeroUtente;
-    int pos = -1;
-    int i;
-    int j = 1;
-
+    int i, j = 1;
 
     for(i=0; i<contEmprestimo; i++)
     {
@@ -273,6 +270,7 @@ void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmpres
                     {
                         possuiBicicleta=1;
                     }
+                    break;
                 }
 
             }
@@ -280,6 +278,7 @@ void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmpres
             {
                 printf("Este utente nao possui uma bicicleta para ser devolvida.");
             }
+            break;
         }
 //        if(possuiBicicleta==1)
 //        {
@@ -291,7 +290,66 @@ void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmpres
         printf("\nNao existe nenhum utente com o numero escolhido");
 
     }
+}/*
+void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo,int *bicicletasOcupadas)
+{
+    int numeroUtente;
+    int pos = -1;
+    int i;
+    int j;
+    char designacao[MAXSTRING];
+    int opcao;
+    int dia,mes,ano;
+    float distancia;
+    int possuiBicicleta=0;
+    tipoData verificar;
+    int dataValida= 0;
+
+    numeroUtente = lerInteiro("\nInsira o numero de utente que quer devolver uma bicicleta:",0,MAXNUMEROUTENTE);
+
+    pos = procurarUtente(utentes,numeroUtente,contUtentes);
+
+    if(pos != -1){
+        for(i=0 ; i<contEmprestimo; i++){
+            if(emprestimos[i].dataDevolucao.dia == 0 && utentes[pos].numero == emprestimos[i].codigoUtente){
+                possuiBicicleta = 1;
+            }
+        }
+
+        if(possuiBicicleta == 1){
+            ///devolver
+            for(j=0; j<contBicicleta; ++j){
+                if(strcmp(bicicleta[j].designacao,emprestimos[i].designacaoBicicleta)==0 && strcmp(bicicleta[j].estado,"emprestada")==0){
+                    verificar= lerData();
+                    dataValida = verificarData(verificar,emprestimos[i].dataEmprestimo);
+
+                    if(dataValida==-1)
+                    {
+                        printf("\nA data de devolucao tem de ser superior a data de emprestimo. ");
+                    }else{
+                        strcpy(bicicleta[j].estado,"disponivel");
+                        strcpy(bicicleta[j].campus, emprestimos[i].campusDestino);
+                        emprestimos[i].dataDevolucao=verificar;
+                        distancia= lerFloat("\nIntroduza a distancia percorrida:",MIN,MAXDISTANCIA);
+                        bicicleta[j].distanciaTotal= bicicleta[j].distanciaTotal + distancia;
+                        emprestimos[i].distanciaPercorrida = distancia;
+                        (*bicicletasOcupadas)--;
+                    }
+                }
+                break;
+        }
+
+    }else{
+        printf("Este utente nao possui uma bicicleta para ser devolvida.");
+    }
+
+    }else
+    {
+        printf("\nNao existe nenhum utente com o numero escolhido");
+
+    }
 }
+*/
 
 int quantidadeEmprestimos(tipoEmprestimo emprestimos[], int *contEmprestimo)
 {

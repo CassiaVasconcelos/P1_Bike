@@ -28,10 +28,9 @@ int main()
 
     lerFicheiroBinBicicleta(bicicleta,&contBicicletas);
     lerFicheiroBinUtente(utente,&contUtente);
-    lerFicheiroBinEspera(espera,&contEspera);
 
-    emprestimo = lerFicheiroBinEmprestimo(emprestimo,&contEmprestimo);
-
+    emprestimo = lerFicheiroBinEmprestimo(emprestimo,&contEmprestimo);//dinamico
+    espera = lerFicheiroBinEspera(espera,&contEspera);
 
     if(quantEmprestimos!=0)
     {
@@ -105,12 +104,37 @@ int main()
             switch(opcEspera)
             {
             case 'A'://alterar campus de destino
+                alterarCampusDestinoEspera(espera,contEspera);
                 break;
             case 'E':
+                if(contEspera == 0)
+                {
+                    printf("\nAinda nao ha utentes para eliminar.");
+                }
+                else
+                {
+                espera = eliminarEspera(utente,espera,contUtente,&contEspera);
+                }
                 break;
             case 'C':
+                if(contEspera == 0)
+                {
+                    printf("\nAinda nao ha utentes na lista de espera.");
+                }
+                else
+                {
+                    consultarEspera(bicicleta,utente,espera,contBicicletas,contUtente,contEspera);
+                }
                 break;
             case 'L':
+                if(contEspera == 0)
+                {
+                    printf("\nAinda nao ha utentes na lista de espera.");
+                }
+                else
+                {
+                    listarEspera(bicicleta,utente,espera,contBicicletas,contUtente,contEspera);
+                }
                 break;
             }
             break;

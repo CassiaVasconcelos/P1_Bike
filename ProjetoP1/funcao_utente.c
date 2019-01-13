@@ -71,10 +71,7 @@ void alterarUtente(tipoUtente Utente[],int contUtente){
     int codigo;
     int opcao;
 
-    printf("\nIntroduza o numero de utente que pretende alterar:");
-    scanf("%d",&codigo);
-    limpaBufferStdin();
-
+    codigo = lerInteiro("\nIntroduza o numero de utente que pretende alterar:",0,MAXNUMEROUTENTE);
      pos = procurarUtente(Utente,codigo,contUtente);
 
     if(pos != -1){
@@ -101,7 +98,7 @@ void alterarUtente(tipoUtente Utente[],int contUtente){
 
         printf("\nUtente alterado com sucesso");
     }else{
-         printf("\nNao existe ninhum utente com o numero de utente inserido");
+         printf("\nNao existe nenhum utente com o numero de utente inserido");
     }
 
 }

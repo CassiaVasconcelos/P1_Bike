@@ -140,7 +140,7 @@ void escreverFicheiroBinEmprestimo(tipoEmprestimo emprestimo[], int contEmpresti
     }
 }
 
-tipoEmprestimo *lerFicheiroBinEspera(tipoEspera espera[], int *contEspera)
+tipoEspera *lerFicheiroBinEspera(tipoEspera espera[], int *contEspera)
 {
     FILE *ficheiro;
     tipoEspera *aux;
@@ -163,8 +163,7 @@ tipoEmprestimo *lerFicheiroBinEspera(tipoEspera espera[], int *contEspera)
         }
         else
         {
-            fread(aux,sizeof(tipoEspera),*contEspera,ficheiro); //add
-           // fread(emprestimo,sizeof(tipoEmprestimo),contEmprestimo,ficheiro);
+            fread(aux,sizeof(tipoEspera),*contEspera,ficheiro);
         }
 
     }
@@ -194,3 +193,27 @@ void escreverFicheiroBinEspera(tipoEspera espera[], int contEspera)
         printf("\nFicheiro espera exportado com sucesso\n\n");
     }
 }
+/*
+void escreverFicheiroBinEspera(tipoEspera espera[], int contEspera)
+{
+    if (contEspera==0)
+    {
+        printf("Nao existem esperas em registro\n");
+    }
+    FILE *ficheiro;
+
+    ficheiro=fopen("esperas.dat","wb");
+    if(ficheiro==NULL)
+    {
+        printf("Erro de abertura espera");
+    }
+    else
+    {
+        fwrite(&contEspera,sizeof(int),1,ficheiro);
+        fwrite(espera,sizeof(tipoEspera),contEspera,ficheiro);
+
+        fclose(ficheiro);
+        printf("\nFicheiro espera exportado com sucesso\n\n");
+    }
+}
+*/

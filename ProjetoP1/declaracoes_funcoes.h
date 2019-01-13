@@ -46,7 +46,7 @@ void lerFicheiroBinUtente(tipoUtente utente[MAXUTENTE], int *contUtente);
 void escreverFicheiroBinUtente(tipoUtente utente[MAXUTENTE], int contUtente);
 tipoEmprestimo *lerFicheiroBinEmprestimo(tipoEmprestimo emprestimo[], int *contEmprestimo);
 void escreverFicheiroBinEmprestimo(tipoEmprestimo emprestimo[], int contEmprestimo);
-tipoEmprestimo *lerFicheiroBinEspera(tipoEspera espera[], int *contEspera);
+tipoEspera *lerFicheiroBinEspera(tipoEspera espera[], int *contEspera);
 void escreverFicheiroBinEspera(tipoEspera espera[], int contEspera);
 
 //utentes
@@ -58,5 +58,9 @@ void listarUtente(tipoUtente Utente[],int contUtente);
 
 //espera
 tipoEspera *registrarEspera(tipoEspera espera[],tipoUtente utente[],int *contEspera,int contUtente);
+void consultarEspera(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEspera espera[],int contBicicleta,int contUtentes,int contEspera);
+void listarEspera(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEspera espera[],int contBicicleta,int contUtentes,int contEspera);
+void alterarCampusDestinoEspera(tipoEspera espera[],  int contEspera);
+tipoEspera *eliminarEspera(tipoUtente utentes[],tipoEspera espera[],int contUtentes,int *contEspera);
 
 #endif // DECLARACOES_FUNCOES_H_INCLUDED
