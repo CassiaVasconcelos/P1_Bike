@@ -63,4 +63,7 @@ void listarEspera(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEspera espe
 void alterarCampusDestinoEspera(tipoEspera espera[],  int contEspera);
 tipoEspera *eliminarEspera(tipoUtente utentes[],tipoEspera espera[],int contUtentes,int *contEspera);
 
+//estatistica
+void listarUtentesPorNumeroDecrescenteDeEmprestimos(tipoUtente utentes[],tipoEmprestimo emprestimos[],int contUtentes,int contEmprestimo);
+void listarDadosEmprestimoUtente(tipoBicicleta bicicletas[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo);
 #endif // DECLARACOES_FUNCOES_H_INCLUDED

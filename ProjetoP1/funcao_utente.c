@@ -107,9 +107,8 @@ void consultarUtente(tipoUtente Utente[],int contUtente){
     int codigo;
     int pos = -1;
 
-    printf("\nIntroduza o numero de utente que pretende alterar:");
-    scanf("%d",&codigo);
-    limpaBufferStdin();
+    codigo = lerInteiro("\nInsira o numero do utente que pretende consultar:",0,MAXNUMEROUTENTE);
+
     pos = procurarUtente(Utente,codigo,contUtente);
 
     if(pos != -1){

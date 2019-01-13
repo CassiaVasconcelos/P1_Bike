@@ -9,6 +9,7 @@
 #include "constantes.h"
 #include "estruturas.h"
 
+
 int menuPrincipal(int contBicicletas, int contEmprestimo, int contEspera, int contUtente, int bicicletasOcupadas, float distTotPecorrida, int quantAvariadas){
     int opcao;
  //   float top=0.;

@@ -263,6 +263,8 @@ void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmpres
                             distancia= lerFloat("\nIntroduza a distancia percorrida:",MIN,MAXDISTANCIA);
                             bicicleta[j].distanciaTotal= bicicleta[j].distanciaTotal + distancia;
                             emprestimos[i].distanciaPercorrida = distancia;
+                            utentes[pos].distanciaPercorrida = utentes[pos].distanciaPercorrida + distancia;//atualizar a distancia pecorrida do utilizador
+
                             (*bicicletasOcupadas)--;
                         }
                     }

@@ -113,7 +113,7 @@ int main()
                 }
                 else
                 {
-                espera = eliminarEspera(utente,espera,contUtente,&contEspera);
+                    espera = eliminarEspera(utente,espera,contUtente,&contEspera);
                 }
                 break;
             case 'C':
@@ -176,10 +176,19 @@ int main()
             }
             break;
         case 5:
+            if(contEmprestimo == 0)
+            {
+                printf("\nAinda nao foram efetuados qualquer emprestimo");
+            }
+            else
+            {
+                listarUtentesPorNumeroDecrescenteDeEmprestimos(utente,emprestimo,contUtente,contEmprestimo);
+            }
             break;
         case 6:
             break;
         case 7:
+            listarDadosEmprestimoUtente(bicicleta,utente,emprestimo,contBicicletas,contUtente,contEmprestimo);
             break;
         }
     }
