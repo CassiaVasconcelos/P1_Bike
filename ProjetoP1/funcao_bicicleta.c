@@ -150,11 +150,13 @@ void registarAvariaReparacao(tipoBicicleta bicicletas[], int contBicicleta,int *
 
     if(pos != -1)
     {
-        printf("\nEscolha a opcao pretendida");
+      /*  printf("\nEscolha a opcao pretendida");
         printf("\n1->Avaria");
         printf("\n2->Reparacao");
         printf("\n3->Voltar");
         opcao = lerInteiro("\nEscolhe uma opcao: ",1,3);
+*/
+        opcao = subMenuAvariaReparacao();
 
         ///disponivel emprestada avariada
         switch(opcao)
@@ -181,8 +183,8 @@ void registarAvariaReparacao(tipoBicicleta bicicletas[], int contBicicleta,int *
                 {
                     ///designação da bicicleta, distância total percorrida, data e hora da avaria, e descrição da avaria.
                     fprintf(file,"Designacao bicicleta: %s\n",bicicletas[pos].designacao);
-                    fprintf(file,"Distancia total percorrida: %f\n",bicicletas[pos].distanciaTotal);
-                    fprintf(file,"Data da avaria: %02d/%02d/%d\t%02d:%02d\n",data.dia, data.mes, data.ano,data.hora,data.minuto);
+                    fprintf(file,"Distancia total percorrida: %.2f\n",bicicletas[pos].distanciaTotal);
+                    fprintf(file,"Data da avaria: %02d/%02d/%04d\t%02d:%02d\n",data.dia, data.mes, data.ano,data.hora,data.minuto);
                     fprintf(file,"Causa da avaria: %s\n",causaAvaria);
                     fprintf(file,"-----------------------------------------------------\n");
                     fclose(file);

@@ -117,10 +117,10 @@ void consultarUtente(tipoUtente Utente[],int contUtente){
         printf("\nNumero Utente:%d",Utente[pos].numero);
         printf("\nTelemovel Utente:%d",Utente[pos].telemovel);
         printf("\nTipo de Utente:%s",Utente[pos].tipo);
-        printf("\nDistancia percorrida pelo Utente:%d",Utente[pos].distanciaPercorrida);
+        printf("\nDistancia percorrida pelo Utente:%.2f",Utente[pos].distanciaPercorrida);
         printf("\nQuantidade de emprestimo efectuadas pelo Utente:%d",Utente[pos].quantidadeEmprestimos);
     }else{
-        printf("\nNao existe nenhum utente com o numero de utente inserido");
+        printf("\nNao existe nenhum utente com o numero inserido");
      }
 }
 
@@ -132,7 +132,7 @@ void listarUtente(tipoUtente Utente[],int contUtente){
         printf("\nNumero Utente:%d",Utente[i].numero);
         printf("\nTelemovel Utente:%d",Utente[i].telemovel);
         printf("\nTipo de Utente:%s",Utente[i].tipo);
-        printf("\nDistancia percorrida pelo Utente:%d",Utente[i].distanciaPercorrida);
+        printf("\nDistancia percorrida pelo Utente:%.2f",Utente[i].distanciaPercorrida);
         printf("\nQuantidade de emprestimo efectuadas pelo Utente:%d",Utente[i].quantidadeEmprestimos);
     }
 

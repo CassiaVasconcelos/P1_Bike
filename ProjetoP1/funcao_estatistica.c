@@ -308,6 +308,7 @@ void estatisticas(tipoBicicleta bicicleta[],tipoUtente utente[],tipoEmprestimo e
     }
     else
     {
+        printf("\n\nSelecione um intervalo de datas que deseja saber estatisticas dos emprestimos realizados");
         printf("\nData inicio:");
         dataInicio = lerData();
         printf("\nData fim:");
@@ -430,17 +431,17 @@ void estatisticas(tipoBicicleta bicicleta[],tipoUtente utente[],tipoEmprestimo e
         }
         else
         {
-            percentagemUtente = (float)(totalEmprestimosAluno/contEmprestimo)*100;
+            percentagemUtente = ((float)totalEmprestimosAluno/contEmprestimo)*100;
             printf("\n\nPercentagem de emprestimo por tipo de utente");
             printf("\nAlunos:%.2f%%",percentagemUtente);
 
-            percentagemUtente = (totalEmprestimosDocente/contEmprestimo)*100;
+            percentagemUtente = ((float)totalEmprestimosDocente/contEmprestimo)*100;
             printf("\nDocente:%.2f%%",percentagemUtente);
 
-            percentagemUtente = (totalEmprestimosTecnico/contEmprestimo)*100;
+            percentagemUtente = ((float)totalEmprestimosTecnico/contEmprestimo)*100;
             printf("\nTecnico Administrativo:%.2f%%",percentagemUtente);
 
-            percentagemUtente = (totalEmprestimosconvidado/contEmprestimo)*100;
+            percentagemUtente = ((float)totalEmprestimosconvidado/contEmprestimo)*100;
             printf("\nConvidado:%.2f%%",percentagemUtente);
         }
     }

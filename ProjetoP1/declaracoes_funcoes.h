@@ -18,8 +18,8 @@ char menuUtente(int contUtente);
 char menuEmprestimo(int bicicletasOcupadas);
 int menuCampus();
 int subMenuTipoUtente();
-//int menuEspera(int contadorEspera);
 char menuEspera(int numeroDeEsperas);
+int subMenuAvariaReparacao();
 
 //bicicletas
 void inserirBicicleta(tipoBicicleta bicicletas[],int *contBicicletas);
@@ -38,8 +38,11 @@ void consultarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmpr
 void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo,int *bicicletasOcupadas,int *sucessoDevolucao);
 int quantidadeEmprestimos(tipoEmprestimo emprestimos[], int *contEmprestimo);
 int verificarData(tipoData verificar,tipoData dataEmprestimo);
-tipoEmprestimo *atribuirBike(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],tipoEspera esperaAux,int contBicicleta,int contUtente,int *contEmprestimo,int *idEmprestimo,int *bicicletasOcupadas);
+//tipoEmprestimo *atribuirBike(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],tipoEspera esperaAux,int contBicicleta,int contUtente,int *contEmprestimo,int *idEmprestimo,int *bicicletasOcupadas);
 int atribuirBicicletaConsoanteCriterio(tipoBicicleta bicicleta[],tipoUtente utente[],tipoEspera espera[],int contBicicletas,int contUtente,int contEspera);
+tipoEmprestimo *atribuirBicicleta(tipoBicicleta bicicleta[],tipoUtente utente[],tipoEmprestimo emprestimo[],tipoEspera esperaAux,int contBicicletas,int contUtente,int *contEmprestimo,int *idEmprestimo,int *bicicletasOcupadas,int posBicicleta);
+tipoEmprestimo *atribuirBike(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],tipoEspera espera[],int contBicicleta,int contUtente,int *contEmprestimo,int *idEmprestimo,int *bicicletasOcupadas,int posEspera);
+
 //ficheiro
 void lerFicheiroBinBicicleta(tipoBicicleta bicicleta[MAXBICICLETA], int *contBicicletas);
 void escreverFicheiroBinBicicleta(tipoBicicleta bicicleta[MAXBICICLETA], int contBicicletas);
@@ -63,6 +66,9 @@ void consultarEspera(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEspera e
 void listarEspera(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEspera espera[],int contBicicleta,int contUtentes,int contEspera);
 void alterarCampusDestinoEspera(tipoEspera espera[],  int contEspera);
 tipoEspera *eliminarEspera(tipoUtente utentes[],tipoEspera espera[],int contUtentes,int *contEspera);
+int verificarListaDeEspera(tipoBicicleta bicicleta[],tipoUtente utente[],tipoEspera espera[],int contUtente,int contEspera,int contBicicletas,int *posBicicleta);
+tipoEspera *removerEspera(tipoUtente utente[],tipoEspera espera[],tipoEspera esperaAux,int contUtente,int *contEspera,int posEspera);
+tipoEspera *removerListaEspera(tipoEspera espera[],int *contEspera,int pos);
 
 //estatistica
 void listarUtentesPorNumeroDecrescenteDeEmprestimos(tipoUtente utentes[],tipoEmprestimo emprestimos[],int contUtentes,int contEmprestimo);

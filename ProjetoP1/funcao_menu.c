@@ -19,6 +19,7 @@ int menuPrincipal(int contBicicletas, int contEmprestimo, int contEspera, int co
     printf("\n----- _-\\<,_                   _,>/-_ ------");
     printf("\n---- (*)/ (*)                 (*) \\(*) -----");
     printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+  //  printf("\n--------------------------------------------");
     printf("\n___________Welcome to CampusBike____________\n\n");
 
     printf("\nNumero de bicicletas registradas:%d",contBicicletas);
@@ -148,6 +149,16 @@ int subMenuTipoUtente()
     opcao = lerInteiro("\nEscolhe uma opcao: ",1,4);
 
     return opcao;
+}
+
+int subMenuAvariaReparacao(){
+        int opcao;
+        printf("\nEscolha a opcao pretendida");
+        printf("\n1->Avaria");
+        printf("\n2->Reparacao");
+        printf("\n3->Voltar");
+        opcao = lerInteiro("\nEscolhe uma opcao: ",1,3);
+        return opcao;
 }
 
 char menuEspera(int numeroDeEsperas)

@@ -166,7 +166,7 @@ void listarEspera(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEspera espe
         printf("\nCodigo de utente:%d",espera[i].codigoUtente);
         printf("\nCampus Origem:%s",espera[i].campusOrigem);
         printf("\nCampus destino:%s",espera[i].campusDestino);
-        printf("\nData prevista para emprestimo:%02d-%02d-%04d\t\t%02d:%02d",espera[i].dataRegistro.dia,espera[i].dataRegistro.mes,espera[i].dataRegistro.ano,
+        printf("\nData de registo de espera para emprestimo:%02d-%02d-%04d\t\t%02d:%02d",espera[i].dataRegistro.dia,espera[i].dataRegistro.mes,espera[i].dataRegistro.ano,
                espera[i].dataRegistro.hora,espera[i].dataRegistro.minuto);
         j++;
     }
@@ -294,28 +294,51 @@ tipoEspera *eliminarEspera(tipoUtente utentes[],tipoEspera espera[],int contUten
     return aux;
 }
 
-int verificarExistenciaNaListaDeEspera(tipoBicicleta bicicleta[],tipoEspera espera[],int contBicicletas,int contEspera){
-    int existe = 0;
-    int i;
-    int pos;
+int verificarExistenciaNaListaDeEspera(tipoBicicleta bicicleta[],tipoEspera espera[],int contBicicletas,int contEspera)
+{
+    int i,j;
+    int pos = -1;
+    int posEspera = -1;
 
-    for(i=0;i<contBicicletas;i++){
-        if(strcmp(bicicleta[i].estado,"disponivel")==0){
+    for(i=0; i<contBicicletas; i++)
+    {
+        if(strcmp(bicicleta[i].estado,"disponivel")==0)
+        {
             pos =i;
         }
     }
 
-    for(i=0;i<contEspera;i++){
-        if(strcmp(espera[i].campusOrigem,bicicleta[pos].campus)==0){
-            existe = 1;
+    if(pos != -1)
+    {
+        if(contEspera == 0)
+        {
+            printf("\nNao existem utentes na lista de espera");
+        }
+        else
+        {
+            for(i=0; i<contEspera; i++)
+            {
+                for(j=0; j<contBicicletas; j++)
+                {
+                    if(strcmp(espera[i].campusOrigem,bicicleta[j].campus)==0)
+                    {
+                        /*printf("\nasdasd:%s",espera[i].campusOrigem);
+                        printf("\njyujyuj:%s",bicicleta[pos].campus);
+
+                        printf("zxczxcz");*/
+                        posEspera = i;
+                        break;
+                    }
+                }
+
+            }
         }
     }
 
 
-
-    return existe;
+return posEspera;
 }
-tipoEspera *removerListaEspera(tipoEspera espera[],tipoEspera esperaAux,int *contEspera,int pos)
+tipoEspera *removerListaEspera(tipoEspera espera[],int *contEspera,int pos)
 {
     int i;
     tipoEspera *aux;
@@ -323,10 +346,13 @@ tipoEspera *removerListaEspera(tipoEspera espera[],tipoEspera esperaAux,int *con
     int j;
     tipoEspera auxiliar;
 
-    esperaAux.codigoUtente = aux[pos].codigoUtente;
-    strcpy(esperaAux.campusDestino,aux[j].campusDestino);
-    strcpy(esperaAux.campusOrigem,aux[j].campusOrigem);
-    esperaAux.dataRegistro = aux[j].dataRegistro;
+/*esperaAux.codigoUtente = espera[pos].codigoUtente;
+    strcpy(esperaAux.campusDestino,espera[pos].campusDestino);
+    strcpy(esperaAux.campusOrigem,espera[pos].campusOrigem);
+    esperaAux.dataRegistro = espera[pos].dataRegistro;*/
+
+/*    printf("\nAux:%d",esperaAux.codigoUtente);
+    printf("\nAux1:%d",espera[pos].codigoUtente);*/
 
     for(i=pos; i<*contEspera-1; i++)
     {
@@ -350,7 +376,65 @@ tipoEspera *removerListaEspera(tipoEspera espera[],tipoEspera esperaAux,int *con
 
 
     return aux;
-
 }
 
+int verificarListaDeEspera(tipoBicicleta bicicleta[],tipoUtente utente[],tipoEspera espera[],int contUtente,int contEspera,int contBicicletas,int *posBicicleta)
+{
+    int pos = -1;
+    int i;
+    char campus[MAXSTRING];
+    int posBike = -1;
+    int j;
+    (*posBicicleta) = contBicicletas;
 
+
+    for (j=0; j<contEspera; j++)
+    {
+        if(strcmp(bicicleta[contBicicletas].campus,espera[i].campusOrigem)==0)
+        {
+            pos = j;
+        }
+    }
+
+    return pos;
+}
+
+tipoEspera *removerEspera(tipoUtente utente[],tipoEspera espera[],tipoEspera esperaAux,int contUtente,int *contEspera,int posEspera)
+{
+    int i;
+    tipoEspera *aux;
+    aux = espera;
+    int j=1;
+    int codigo;
+    int pos = -1;
+    int posApagar=posEspera;
+    tipoEspera auxiliar;
+
+    strcpy(esperaAux.campusDestino,espera[posApagar].campusDestino);
+    strcpy(esperaAux.campusOrigem,espera[posApagar].campusOrigem);
+    esperaAux.codigoUtente = espera[posApagar].codigoUtente;
+
+    for(i=posApagar; i<*contEspera-1; i++)
+    {
+        j=i+1;  //substitiu a posicao posterior a posicao eliminada
+
+        auxiliar.codigoUtente = aux[j].codigoUtente;//salvando no auxiliar a posicao a frente
+        strcpy(auxiliar.campusDestino,aux[j].campusDestino);
+        strcpy(auxiliar.campusOrigem,aux[j].campusOrigem);
+        auxiliar.dataRegistro = aux[j].dataRegistro;
+
+        aux[i].codigoUtente = auxiliar.codigoUtente;
+        strcpy(aux[i].campusDestino,auxiliar.campusDestino);
+        strcpy(aux[i].campusOrigem,auxiliar.campusOrigem);
+        aux[i].dataRegistro = auxiliar.dataRegistro;
+
+    }
+
+    aux = realloc(aux,(*contEspera-1)*sizeof(tipoEspera));
+    (*contEspera)--;
+    printf("\nO utente foi eliminado da lista de espera");
+
+    return aux;
+
+
+}

@@ -240,7 +240,6 @@ void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmpres
     {
         for(i=0 ; i<contEmprestimo; i++)
         {
-            //se data de devolução<data de empréstimo, exibir erro.
             if(emprestimos[i].dataDevolucao.dia == 0 && utentes[pos].numero == emprestimos[i].codigoUtente)
             {
                 for(j=0; j<contBicicleta; ++j)
@@ -302,6 +301,7 @@ void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmpres
                             utentes[pos].distanciaPercorrida = utentes[pos].distanciaPercorrida + distancia;//atualizar a distancia pecorrida do utilizador
                             (*bicicletasOcupadas)--;
                             (*sucessoDevolucao) =1;
+
                             printf("\nDevolucao concluida com sucesso.");
                         }
                     }
@@ -316,7 +316,6 @@ void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmpres
             {
                 printf("Este utente nao possui uma bicicleta para ser devolvida.");
             }
-            break;
         }
     }
     else
@@ -424,7 +423,7 @@ int verificarData(tipoData verificar,tipoData dataEmprestimo)
     return dataValida;
 }
 
-tipoEmprestimo *atribuirBike(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],tipoEspera esperaAux,int contBicicleta,int contUtente,int *contEmprestimo,int *idEmprestimo,int *bicicletasOcupadas)
+tipoEmprestimo *atribuirBike(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],tipoEspera espera[],int contBicicleta,int contUtente,int *contEmprestimo,int *idEmprestimo,int *bicicletasOcupadas,int posEspera)
 {
     int pos = -1;
     int i;
@@ -437,11 +436,14 @@ tipoEmprestimo *atribuirBike(tipoBicicleta bicicleta[],tipoUtente utentes[],tipo
 
     for(i=0; i<contUtente; i++)
     {
-        if(utentes[i].numero == esperaAux.codigoUtente)
+        if(utentes[i].numero == espera[posEspera].codigoUtente)
         {
+            //printf("\nteste:%d",i);
             pos = i;
         }
     }
+
+    //printf("\nasdasd:%d",esperaAux.codigoUtente);
 
     aux = realloc(aux,(*contEmprestimo+1)*sizeof(tipoEmprestimo));
 
@@ -451,18 +453,17 @@ tipoEmprestimo *atribuirBike(tipoBicicleta bicicleta[],tipoUtente utentes[],tipo
     }
     else
     {
-        aux[*contEmprestimo].codigoUtente = esperaAux.codigoUtente;
+        aux[*contEmprestimo].codigoUtente = espera[posEspera].codigoUtente;
+        printf("\nData de realizacao do emprestimo:");
         aux[*contEmprestimo].dataEmprestimo = lerData();
-        strcpy(aux[*contEmprestimo].campusOrigem,esperaAux.campusOrigem);
-        strcpy(aux[*contEmprestimo].campusDestino,esperaAux.campusDestino);
+        strcpy(aux[*contEmprestimo].campusOrigem,espera[posEspera].campusOrigem);
+        strcpy(aux[*contEmprestimo].campusDestino,espera[posEspera].campusDestino);
         aux[*contEmprestimo].numeroRegisto = *idEmprestimo;
-        aux[*contEmprestimo].dataEmprestimo = lerData();
 
         for(i=0; i<contBicicleta; i++)
         {
-            if(strcmp(bicicleta[i].campus,esperaAux.campusOrigem)==0)
+            if(strcmp(bicicleta[i].campus,espera[posEspera].campusOrigem)==0)
             {
-
                 if(strcmp(bicicleta[i].estado,"disponivel")==0)  //ve se tem alguma bicicleta disponivel naquele campus
                 {
                     strcpy(aux[*contEmprestimo].designacaoBicicleta,bicicleta[i].designacao);
@@ -474,8 +475,6 @@ tipoEmprestimo *atribuirBike(tipoBicicleta bicicleta[],tipoUtente utentes[],tipo
                     (*bicicletasOcupadas)++;
                 }
             }
-
-
         }
     }
 
@@ -681,4 +680,51 @@ int atribuirBicicletaConsoanteCriterio(tipoBicicleta bicicleta[],tipoUtente uten
     return pos;
 }
 
+tipoEmprestimo *atribuirBicicleta(tipoBicicleta bicicleta[],tipoUtente utente[],tipoEmprestimo emprestimo[],tipoEspera esperaAux,int contBicicletas,int contUtente,int *contEmprestimo,int *idEmprestimo,int *bicicletasOcupadas,int posBicicleta)
+{
+    int pos = -1;
+    int opcao;
+    char campus[MAXSTRING];
+    int codigo;
+    tipoEmprestimo *aux;
+    aux = emprestimo;  ///add
+    int emprestimoRealizado=0,naoDisponivel=0;
+    int i;
 
+    for(i=0; i<contUtente; i++)
+    {
+        if(utente[i].numero == esperaAux.codigoUtente)
+        {
+            pos = i;
+        }
+    }
+
+    aux = realloc(aux,(*contEmprestimo+1)*sizeof(tipoEmprestimo));
+
+    if(aux == NULL)
+    {
+        printf("\nImpossivel alocar memoria.");
+    }
+    else
+    {
+        aux[*contEmprestimo].codigoUtente = esperaAux.codigoUtente;
+        aux[*contEmprestimo].dataEmprestimo = lerData();
+        strcpy(aux[*contEmprestimo].campusOrigem,esperaAux.campusOrigem);
+        strcpy(aux[*contEmprestimo].campusDestino,esperaAux.campusDestino);
+        aux[*contEmprestimo].numeroRegisto = *idEmprestimo;
+
+
+        strcpy(aux[*contEmprestimo].designacaoBicicleta,bicicleta[posBicicleta].designacao);
+        bicicleta[posBicicleta].quantidadeEmprestimos++;
+        strcpy(bicicleta[posBicicleta].estado,"emprestada");
+        utente[pos].quantidadeEmprestimos++;
+        (*contEmprestimo)++;
+        (*idEmprestimo)++;
+        (*bicicletasOcupadas)++;
+
+
+
+    }
+
+    return aux;//para atualizar a memoria dinamica
+}

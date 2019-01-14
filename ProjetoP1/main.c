@@ -17,6 +17,9 @@ int main()
     float distTotPecorrida=0.;
     int verPossibEmprestimo=0;
     int sucessoDevolucao=0, existe=0,posAtribuir=-1;//devolucao
+    int pos = -1;
+    int posBicicleta = -1;
+  //  tipoEspera esperaAux;
 
     //  tipoData data;
     tipoBicicleta bicicleta[MAXBICICLETA];
@@ -63,6 +66,12 @@ int main()
                 else
                 {
                     inserirBicicleta(bicicleta,&contBicicletas);
+                    pos = verificarListaDeEspera(bicicleta,utente,espera,contUtente,contEspera,contBicicletas,&posBicicleta);
+
+                    if(pos != -1 && posBicicleta != -1){
+                        espera = removerEspera(utente,espera,esperaAux,contUtente,&contEspera,pos);
+                        emprestimo = atribuirBicicleta(bicicleta,utente,emprestimo,esperaAux,contBicicletas,contUtente,&contEmprestimo,&idEmprestimo,&bicicletasOcupadas,posBicicleta);
+                    }
                 }
                 break;
             case 'C':
@@ -155,24 +164,16 @@ int main()
             case 'D':
                 devolverBicicleta(bicicleta,utente,emprestimo,contBicicletas,contUtente,contEmprestimo,&bicicletasOcupadas,&sucessoDevolucao);
 
-                if(sucessoDevolucao == 1)
-                {
-                    ///criterios
-                    existe = verificarExistenciaNaListaDeEspera(bicicleta,espera,contBicicletas,contEspera);
+                if(sucessoDevolucao == 1){
+                    pos = verificarExistenciaNaListaDeEspera(bicicleta,espera,contBicicletas,contEspera);
 
-                    if(existe == 1)
-                    {
-                        posAtribuir = atribuirBicicletaConsoanteCriterio(bicicleta,utente,espera,contBicicletas,contUtente,contEspera);
-
-                        if(posAtribuir != -1)
-                        {
-                            espera = removerListaEspera(espera,esperaAux,&contEspera,posAtribuir);
-                            emprestimo = atribuirBike(bicicleta,utente,emprestimo,esperaAux,contBicicletas,contUtente,&contEmprestimo,&idEmprestimo,&bicicletasOcupadas);
-                        }
+                    if(pos != -1){
+                            emprestimo = atribuirBike(bicicleta,utente,emprestimo,espera,contBicicletas,contUtente,&contEmprestimo,&idEmprestimo,&bicicletasOcupadas,pos);
+                            espera = removerListaEspera(espera,&contEspera,pos);
+                        //printf("\nANA:%d",esperaAux.codigoUtente);
+                        //emprestimo = atribuirBike(bicicleta,utente,emprestimo,esperaAux,contBicicletas,contUtente,&contEmprestimo,&idEmprestimo,&bicicletasOcupadas);
                     }
-
                 }
-
                 break;
             case 'C':
                 if(contEmprestimo == 0)
@@ -216,7 +217,7 @@ int main()
             }
             else
             {
-            listarDadosEmprestimoUtente(bicicleta,utente,emprestimo,contBicicletas,contUtente,contEmprestimo);
+                listarDadosEmprestimoUtente(bicicleta,utente,emprestimo,contBicicletas,contUtente,contEmprestimo);
             }
             break;
         }
