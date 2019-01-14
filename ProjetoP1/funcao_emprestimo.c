@@ -126,9 +126,10 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
                             (*idEmprestimo)++;
                             (*bicicletasOcupadas)++;
                             (*verPossibEmprestimo)=1;//foi possivel fazer o emprestimo
+                            naoDisponivel = 0;
+                            printf("\nEmprestimo realizado com sucesso");
 
                             break;
-
                         }
                         //tipoData dataDevolucao;
                         //int distanciaPercorrida;
@@ -137,7 +138,6 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
                     {
                         naoDisponivel=1;
                         (*verPossibEmprestimo)=0;
-
                     }
                 }
                 else
@@ -153,8 +153,6 @@ tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[
             }
         }
     }
-
-
     return aux;//para atualizar a memoria dinamica
 }
 
@@ -219,7 +217,7 @@ void listarEmprestimos(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmpres
     }
 }
 
-void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo,int *bicicletasOcupadas)
+void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo,int *bicicletasOcupadas,int *sucessoDevolucao)
 {
     int numeroUtente;
     int pos = -1;
@@ -228,10 +226,11 @@ void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmpres
     char designacao[MAXSTRING];
     int opcao;
     int dia,mes,ano;
-    float distancia;
+    float distancia = 0;
     int possuiBicicleta=0;
     tipoData verificar;
     int dataValida= 0;
+    (*sucessoDevolucao) =0;
 
     numeroUtente = lerInteiro("\nInsira o numero de utente que quer devolver uma bicicleta:",0,MAXNUMEROUTENTE);
 
@@ -250,6 +249,7 @@ void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmpres
                     {
                         verificar= lerData();
                         dataValida = verificarData(verificar,emprestimos[i].dataEmprestimo);
+
                         if(dataValida==-1)
                         {
                             ///data invalida
@@ -260,19 +260,55 @@ void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmpres
                             strcpy(bicicleta[j].estado,"disponivel");
                             strcpy(bicicleta[j].campus, emprestimos[i].campusDestino);
                             emprestimos[i].dataDevolucao=verificar;
-                            distancia= lerFloat("\nIntroduza a distancia percorrida:",MIN,MAXDISTANCIA);
+
+                            if(strcmp(emprestimos[i].campusOrigem,"residencias")==0 && strcmp(emprestimos[i].campusOrigem,"campus 1")==0)
+                            {
+                                distancia= lerFloat("\nIntroduza a distancia percorrida:",DIST_R_C1,MAXDISTANCIA);
+                            }
+                            else
+                            {
+                                if(strcmp(emprestimos[i].campusOrigem,"residencias")==0 && strcmp(emprestimos[i].campusOrigem,"campus 2")==0)
+                                {
+                                    distancia= lerFloat("\nIntroduza a distancia percorrida:",DIST_R_C2,MAXDISTANCIA);
+                                }
+                                else
+                                {
+                                    if(strcmp(emprestimos[i].campusOrigem,"residencias")==0 && strcmp(emprestimos[i].campusOrigem,"campus 5")==0)
+                                    {
+                                        distancia= lerFloat("\nIntroduza a distancia percorrida:",DIST_R_C5,MAXDISTANCIA);
+                                    }
+                                    else
+                                    {
+                                        if(strcmp(emprestimos[i].campusOrigem,"campus 1")==0 && strcmp(emprestimos[i].campusOrigem,"campus 2")==0)
+                                        {
+                                            distancia= lerFloat("\nIntroduza a distancia percorrida:",DIST_C1_C2,MAXDISTANCIA);
+                                        }
+                                        else
+                                        {
+                                            if(strcmp(emprestimos[i].campusOrigem,"campus 1")==0 && strcmp(emprestimos[i].campusOrigem,"campus 5")==0)
+                                            {
+                                                distancia= lerFloat("\nIntroduza a distancia percorrida:",DIST_C1_C5,MAXDISTANCIA);
+                                            }
+                                            else
+                                            {
+                                                distancia= lerFloat("\nIntroduza a distancia percorrida:",DIST_C2_C5,MAXDISTANCIA);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                             bicicleta[j].distanciaTotal= bicicleta[j].distanciaTotal + distancia;
                             emprestimos[i].distanciaPercorrida = distancia;
                             utentes[pos].distanciaPercorrida = utentes[pos].distanciaPercorrida + distancia;//atualizar a distancia pecorrida do utilizador
-
                             (*bicicletasOcupadas)--;
+                            (*sucessoDevolucao) =1;
+                            printf("\nDevolucao concluida com sucesso.");
                         }
                     }
                     else
                     {
                         possuiBicicleta=1;
                     }
-                    break;
                 }
 
             }
@@ -282,76 +318,13 @@ void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmpres
             }
             break;
         }
-//        if(possuiBicicleta==1)
-//        {
-//            printf("Este utente nao possui uma bicicleta para ser devolvida.");
-//        }
     }
     else
     {
         printf("\nNao existe nenhum utente com o numero escolhido");
 
     }
-}/*
-void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo,int *bicicletasOcupadas)
-{
-    int numeroUtente;
-    int pos = -1;
-    int i;
-    int j;
-    char designacao[MAXSTRING];
-    int opcao;
-    int dia,mes,ano;
-    float distancia;
-    int possuiBicicleta=0;
-    tipoData verificar;
-    int dataValida= 0;
-
-    numeroUtente = lerInteiro("\nInsira o numero de utente que quer devolver uma bicicleta:",0,MAXNUMEROUTENTE);
-
-    pos = procurarUtente(utentes,numeroUtente,contUtentes);
-
-    if(pos != -1){
-        for(i=0 ; i<contEmprestimo; i++){
-            if(emprestimos[i].dataDevolucao.dia == 0 && utentes[pos].numero == emprestimos[i].codigoUtente){
-                possuiBicicleta = 1;
-            }
-        }
-
-        if(possuiBicicleta == 1){
-            ///devolver
-            for(j=0; j<contBicicleta; ++j){
-                if(strcmp(bicicleta[j].designacao,emprestimos[i].designacaoBicicleta)==0 && strcmp(bicicleta[j].estado,"emprestada")==0){
-                    verificar= lerData();
-                    dataValida = verificarData(verificar,emprestimos[i].dataEmprestimo);
-
-                    if(dataValida==-1)
-                    {
-                        printf("\nA data de devolucao tem de ser superior a data de emprestimo. ");
-                    }else{
-                        strcpy(bicicleta[j].estado,"disponivel");
-                        strcpy(bicicleta[j].campus, emprestimos[i].campusDestino);
-                        emprestimos[i].dataDevolucao=verificar;
-                        distancia= lerFloat("\nIntroduza a distancia percorrida:",MIN,MAXDISTANCIA);
-                        bicicleta[j].distanciaTotal= bicicleta[j].distanciaTotal + distancia;
-                        emprestimos[i].distanciaPercorrida = distancia;
-                        (*bicicletasOcupadas)--;
-                    }
-                }
-                break;
-        }
-
-    }else{
-        printf("Este utente nao possui uma bicicleta para ser devolvida.");
-    }
-
-    }else
-    {
-        printf("\nNao existe nenhum utente com o numero escolhido");
-
-    }
 }
-*/
 
 int quantidadeEmprestimos(tipoEmprestimo emprestimos[], int *contEmprestimo)
 {
@@ -450,3 +423,262 @@ int verificarData(tipoData verificar,tipoData dataEmprestimo)
     }
     return dataValida;
 }
+
+tipoEmprestimo *atribuirBike(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],tipoEspera esperaAux,int contBicicleta,int contUtente,int *contEmprestimo,int *idEmprestimo,int *bicicletasOcupadas)
+{
+    int pos = -1;
+    int i;
+    int opcao;
+    char campus[MAXSTRING];
+    int codigo;
+    tipoEmprestimo *aux;
+    aux = emprestimos;  ///add
+    int emprestimoRealizado=0,naoDisponivel=0;
+
+    for(i=0; i<contUtente; i++)
+    {
+        if(utentes[i].numero == esperaAux.codigoUtente)
+        {
+            pos = i;
+        }
+    }
+
+    aux = realloc(aux,(*contEmprestimo+1)*sizeof(tipoEmprestimo));
+
+    if(aux == NULL)
+    {
+        printf("\nImpossivel alocar memoria.");
+    }
+    else
+    {
+        aux[*contEmprestimo].codigoUtente = esperaAux.codigoUtente;
+        aux[*contEmprestimo].dataEmprestimo = lerData();
+        strcpy(aux[*contEmprestimo].campusOrigem,esperaAux.campusOrigem);
+        strcpy(aux[*contEmprestimo].campusDestino,esperaAux.campusDestino);
+        aux[*contEmprestimo].numeroRegisto = *idEmprestimo;
+        aux[*contEmprestimo].dataEmprestimo = lerData();
+
+        for(i=0; i<contBicicleta; i++)
+        {
+            if(strcmp(bicicleta[i].campus,esperaAux.campusOrigem)==0)
+            {
+
+                if(strcmp(bicicleta[i].estado,"disponivel")==0)  //ve se tem alguma bicicleta disponivel naquele campus
+                {
+                    strcpy(aux[*contEmprestimo].designacaoBicicleta,bicicleta[i].designacao);
+                    bicicleta[i].quantidadeEmprestimos++;
+                    strcpy(bicicleta[i].estado,"emprestada");
+                    utentes[pos].quantidadeEmprestimos++;
+                    (*contEmprestimo)++;
+                    (*idEmprestimo)++;
+                    (*bicicletasOcupadas)++;
+                }
+            }
+
+
+        }
+    }
+
+    return aux;//para atualizar a memoria dinamica
+}
+
+int atribuirBicicletaConsoanteCriterio(tipoBicicleta bicicleta[],tipoUtente utente[],tipoEspera espera[],int contBicicletas,int contUtente,int contEspera)
+{
+    int opcao;
+    int i;
+    int j;
+    int pos;
+    char tipo[MAXSTRING];
+    int distanciaAux=0;
+
+///ordem de entrada do pedido, por tipo de utente ou por distância a percorrer (entre os campi).
+    printf("\n1->Ordem de entrada do pedido");
+    printf("\n2->Tipo Utente");
+    printf("\n3->Distancia a percorrer");
+    opcao = lerInteiro("\nEscolha o criterio de atribuicao:",1,3);
+
+    switch(opcao)
+    {
+    case 1:
+        ///ordem de entrada do pedido
+        for(i=0; i<contEspera; i++)
+        {
+            for(j=i+1; j<contEspera; j++)
+            {
+                if(espera[i].dataRegistro.ano < espera[j].dataRegistro.ano)
+                {
+                    pos=j;
+                }
+                else
+                {
+                    if(espera[i].dataRegistro.ano > espera[j].dataRegistro.ano)
+                    {
+                        pos=i;
+                    }
+                    else
+                    {
+                        ///anos iguais
+                        if(espera[i].dataRegistro.mes < espera[j].dataRegistro.mes)
+                        {
+                            pos=j;
+                        }
+                        else
+                        {
+                            if(espera[i].dataRegistro.mes > espera[j].dataRegistro.mes)
+                            {
+                                pos=i;
+                            }
+                            else
+                            {
+                                ///meses iguais
+                                if(espera[i].dataRegistro.dia < espera[j].dataRegistro.dia)
+                                {
+                                    pos = j;
+                                }
+                                else
+                                {
+                                    if(espera[i].dataRegistro.dia > espera[j].dataRegistro.dia)
+                                    {
+                                        pos = i;
+                                    }
+                                    else
+                                    {
+                                        ///dias iguais
+
+                                        if(espera[i].dataRegistro.hora < espera[j].dataRegistro.hora)
+                                        {
+                                            pos=j;
+                                        }
+                                        else
+                                        {
+                                            if(espera[i].dataRegistro.hora > espera[j].dataRegistro.hora)
+                                            {
+                                                pos=i;
+                                            }
+                                            else
+                                            {
+                                                ///horas iguais
+
+                                                if(espera[i].dataRegistro.minuto < espera[j].dataRegistro.minuto)
+                                                {
+                                                    pos=j;
+                                                }
+                                                else
+                                                {
+                                                    if(espera[i].dataRegistro.minuto > espera[j].dataRegistro.minuto)
+                                                    {
+                                                        pos=i;
+                                                    }
+                                                    else
+                                                    {
+                                                        ///minutos iguais tanto faz porque as datas sao iguais
+                                                        pos=i;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+        break;
+    case 2:
+        ///por tipo de utente
+        opcao = subMenuTipoUtente();
+
+        switch(opcao)
+        {
+        case 1:
+            strcpy(tipo,"estudante");
+            break;
+        case 2:
+            strcpy(tipo,"docente");
+            break;
+        case 3:
+            strcpy(tipo,"tecnico administrativo");
+            break;
+        case 4:
+            strcpy(tipo,"convidado");
+            break;
+
+        }
+        for(i=0; i<contEspera; i++)
+        {
+            for(j=0; j<contUtente; j++)
+            {
+                if(utente[j].numero == espera[i].codigoUtente)
+                {
+                    if(strcmp(utente[j].tipo,tipo)==0)
+                    {
+                        pos = i;
+                    }
+                }
+            }
+        }
+        break;
+    case 3:
+        ///por distância a percorrer
+        ///residencias, campus 1, campus 2, campus 5
+
+        /**for(i=0; i<contEspera-1; i++)
+        {
+            j=i+1;
+            if(strcmp(espera[i].campusOrigem,"residencias")==0 && strcmp(espera[i].campusDestino,"campus 1")==0)
+            {
+                distanciaAux = DIST_R_C1;
+            }
+
+            if(strcmp(espera[i].campusOrigem,"residencias")==0 && strcmp(espera[i].campusDestino,"campus 2")==0)
+            {
+                distanciaAux = DIST_R_C2;
+            }
+            if(strcmp(espera[i].campusOrigem,"residencias")==0 && strcmp(espera[i].campusDestino,"campus 5")==0)
+            {
+                distanciaAux = DIST_R_C5;
+            }
+            if(strcmp(espera[i].campusOrigem,"campus 1")==0 && strcmp(espera[i].campusDestino,"campus 2")==0)
+            {
+                distanciaAux = DIST_C1_C2;
+            }
+            if(strcmp(espera[i].campusOrigem,"campus 1")==0 && strcmp(espera[i].campusDestino,"campus 5")==0)
+            {
+                distanciaAux = DIST_C1_C5;
+            }
+            if(strcmp(espera[i].campusOrigem,"campus 2")==0 && strcmp(espera[i].campusDestino,"campus 5")==0)
+            {
+                distanciaAux = DIST_C2_C5;
+            }
+
+        }
+
+        printf("\n1->Maior distancia");
+        printf("\n2->Menor distancia");
+        opcao = lerInteiro("\nEscolha a opcao pretendida:",1,2);
+
+        switch(opcao)
+        {
+        case 1:
+            for(i=0; i<contEspera-1; i++)
+            {
+                for(j=i+1; i<contEspera; i++)
+                {
+
+                }
+            }
+            break;
+        case 2:
+            break;
+        }**/
+
+        break;
+    }
+
+    return pos;
+}
+
+

@@ -35,10 +35,11 @@ int atualizarNumeroBicicletasAvariadas(tipoBicicleta bicicleta[],int contBicicle
 tipoEmprestimo *registarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int *contEmprestimo,int *idEmprestimo,int *bicicletasOcupadas, int *verPossibEmprestimo);
 void listarEmprestimos(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo);
 void consultarEmprestimo(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo);
-void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo,int *bicicletasOcupadas);
+void devolverBicicleta(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo,int *bicicletasOcupadas,int *sucessoDevolucao);
 int quantidadeEmprestimos(tipoEmprestimo emprestimos[], int *contEmprestimo);
 int verificarData(tipoData verificar,tipoData dataEmprestimo);
-
+tipoEmprestimo *atribuirBike(tipoBicicleta bicicleta[],tipoUtente utentes[],tipoEmprestimo emprestimos[],tipoEspera esperaAux,int contBicicleta,int contUtente,int *contEmprestimo,int *idEmprestimo,int *bicicletasOcupadas);
+int atribuirBicicletaConsoanteCriterio(tipoBicicleta bicicleta[],tipoUtente utente[],tipoEspera espera[],int contBicicletas,int contUtente,int contEspera);
 //ficheiro
 void lerFicheiroBinBicicleta(tipoBicicleta bicicleta[MAXBICICLETA], int *contBicicletas);
 void escreverFicheiroBinBicicleta(tipoBicicleta bicicleta[MAXBICICLETA], int contBicicletas);
@@ -66,5 +67,6 @@ tipoEspera *eliminarEspera(tipoUtente utentes[],tipoEspera espera[],int contUten
 //estatistica
 void listarUtentesPorNumeroDecrescenteDeEmprestimos(tipoUtente utentes[],tipoEmprestimo emprestimos[],int contUtentes,int contEmprestimo);
 void listarDadosEmprestimoUtente(tipoBicicleta bicicletas[],tipoUtente utentes[],tipoEmprestimo emprestimos[],int contBicicleta,int contUtentes,int contEmprestimo);
+void estatisticas(tipoBicicleta bicicleta[],tipoUtente utente[],tipoEmprestimo emprestimo[],tipoEspera espera[],int contBicicletas,int contUtente,int contEmprestimo,int contEspera);
 
 #endif // DECLARACOES_FUNCOES_H_INCLUDED

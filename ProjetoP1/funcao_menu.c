@@ -15,11 +15,11 @@ int menuPrincipal(int contBicicletas, int contEmprestimo, int contEspera, int co
     int opcao;
     int bicicletasDisponiveis = MAXBICICLETA - bicicletasOcupadas;
 
-    printf("\n\n-------- __@                @__, ---------");
-    printf("\n----- _`|<,_                 ,>_/-_ ------");
-    printf("\n---- (*)/ (*)               (*)`|(*) -----");
-    printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    printf("\n_____________Welcome to UBike_____________\n\n");
+    printf("\n\n--------__@                     @~_ --------");
+    printf("\n----- _-\\<,_                   _,>/-_ ------");
+    printf("\n---- (*)/ (*)                 (*) \\(*) -----");
+    printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    printf("\n___________Welcome to CampusBike____________\n\n");
 
     printf("\nNumero de bicicletas registradas:%d",contBicicletas);
     printf("\nNumero de utentes registrados:%d",contUtente);

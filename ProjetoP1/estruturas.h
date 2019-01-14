@@ -39,7 +39,7 @@ typedef struct{
     char campusOrigem[MAXSTRING];
     char campusDestino[MAXSTRING];
     tipoData dataDevolucao;
-    int distanciaPercorrida;
+    float distanciaPercorrida;
 }tipoEmprestimo;
 
 typedef struct{

@@ -24,7 +24,7 @@ tipoEspera *registrarEspera(tipoEspera espera[],tipoUtente utente[],int *contEsp
     int esperaRealizada=0,naoDisponivel=0;
     int flag = 1;
 
-    codigo = lerInteiro("\nIntroduza o numero de utente:",0,MAXNUMEROUTENTE);
+    codigo = lerInteiro("\nIntroduza o numero de utente para entrar na lista de espera:",0,MAXNUMEROUTENTE);
 
     pos = procurarUtente(utente,codigo,contUtente);
 
@@ -293,3 +293,64 @@ tipoEspera *eliminarEspera(tipoUtente utentes[],tipoEspera espera[],int contUten
 
     return aux;
 }
+
+int verificarExistenciaNaListaDeEspera(tipoBicicleta bicicleta[],tipoEspera espera[],int contBicicletas,int contEspera){
+    int existe = 0;
+    int i;
+    int pos;
+
+    for(i=0;i<contBicicletas;i++){
+        if(strcmp(bicicleta[i].estado,"disponivel")==0){
+            pos =i;
+        }
+    }
+
+    for(i=0;i<contEspera;i++){
+        if(strcmp(espera[i].campusOrigem,bicicleta[pos].campus)==0){
+            existe = 1;
+        }
+    }
+
+
+
+    return existe;
+}
+tipoEspera *removerListaEspera(tipoEspera espera[],tipoEspera esperaAux,int *contEspera,int pos)
+{
+    int i;
+    tipoEspera *aux;
+    aux = espera;
+    int j;
+    tipoEspera auxiliar;
+
+    esperaAux.codigoUtente = aux[pos].codigoUtente;
+    strcpy(esperaAux.campusDestino,aux[j].campusDestino);
+    strcpy(esperaAux.campusOrigem,aux[j].campusOrigem);
+    esperaAux.dataRegistro = aux[j].dataRegistro;
+
+    for(i=pos; i<*contEspera-1; i++)
+    {
+        j=i+1;  //substitiu a posicao posterior a posicao eliminada
+
+        auxiliar.codigoUtente = aux[j].codigoUtente;//salvando no auxiliar a posicao a frente
+        strcpy(auxiliar.campusDestino,aux[j].campusDestino);
+        strcpy(auxiliar.campusOrigem,aux[j].campusOrigem);
+        auxiliar.dataRegistro = aux[j].dataRegistro;
+
+        aux[i].codigoUtente = auxiliar.codigoUtente;
+        strcpy(aux[i].campusDestino,auxiliar.campusDestino);
+        strcpy(aux[i].campusOrigem,auxiliar.campusOrigem);
+        aux[i].dataRegistro = auxiliar.dataRegistro;
+
+    }
+
+    aux = realloc(aux,(*contEspera-1)*sizeof(tipoEspera));
+    (*contEspera)--;
+    printf("\nO utente foi eliminado da lista de espera");
+
+
+    return aux;
+
+}
+
+

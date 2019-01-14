@@ -16,12 +16,14 @@ int main()
     char opcaoBicicleta,opcUtente,opcEmprestimo, opcEspera;
     float distTotPecorrida=0.;
     int verPossibEmprestimo=0;
+    int sucessoDevolucao=0, existe=0,posAtribuir=-1;//devolucao
 
     //  tipoData data;
     tipoBicicleta bicicleta[MAXBICICLETA];
     tipoUtente utente[MAXUTENTE];
     tipoEmprestimo *emprestimo;
     tipoEspera *espera;
+    tipoEspera esperaAux;
 
     emprestimo=NULL;
     espera=NULL;
@@ -151,7 +153,26 @@ int main()
                 }
                 break;
             case 'D':
-                devolverBicicleta(bicicleta,utente,emprestimo,contBicicletas,contUtente,contEmprestimo,&bicicletasOcupadas);
+                devolverBicicleta(bicicleta,utente,emprestimo,contBicicletas,contUtente,contEmprestimo,&bicicletasOcupadas,&sucessoDevolucao);
+
+                if(sucessoDevolucao == 1)
+                {
+                    ///criterios
+                    existe = verificarExistenciaNaListaDeEspera(bicicleta,espera,contBicicletas,contEspera);
+
+                    if(existe == 1)
+                    {
+                        posAtribuir = atribuirBicicletaConsoanteCriterio(bicicleta,utente,espera,contBicicletas,contUtente,contEspera);
+
+                        if(posAtribuir != -1)
+                        {
+                            espera = removerListaEspera(espera,esperaAux,&contEspera,posAtribuir);
+                            emprestimo = atribuirBike(bicicleta,utente,emprestimo,esperaAux,contBicicletas,contUtente,&contEmprestimo,&idEmprestimo,&bicicletasOcupadas);
+                        }
+                    }
+
+                }
+
                 break;
             case 'C':
                 if(contEmprestimo == 0)
@@ -186,6 +207,7 @@ int main()
             }
             break;
         case 6:
+            estatisticas(bicicleta,utente,emprestimo,espera,contBicicletas,contUtente,contEmprestimo,contEspera);
             break;
         case 7:
             if(contEmprestimo == 0)

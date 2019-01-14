@@ -76,7 +76,7 @@ void consultarBicicleta(tipoBicicleta bicicletas[],int contBicicleta)
         printf("\nEstado:%s",bicicletas[pos].estado);
         printf("\nQuantidade Avarias:%d",bicicletas[pos].quantidadeAvarias);
         printf("\nQuantidade Emprestimo:%d",bicicletas[pos].quantidadeEmprestimos);
-        printf("\nDistancia percorrida:%f\n\n",bicicletas[pos].distanciaTotal);
+        printf("\nDistancia percorrida:%.2f\n\n",bicicletas[pos].distanciaTotal);
     }
     else
     {
@@ -98,7 +98,7 @@ void listarBicicletas(tipoBicicleta bicicletas[],int contBicicleta)
         printf("\nEstado:%s",bicicletas[i].estado);
         printf("\nQuantidade Avarias:%d",bicicletas[i].quantidadeAvarias);
         printf("\nQuantidade Emprestimo:%d",bicicletas[i].quantidadeEmprestimos);
-        printf("\nDistancia percorrida:%f",bicicletas[i].distanciaTotal);
+        printf("\nDistancia percorrida:%.2f",bicicletas[i].distanciaTotal);
         j++;
     }
 }
@@ -114,7 +114,6 @@ int procurarBicicleta(tipoBicicleta bicicletas[],char designacao[],int contBicic
         if(strcmp(bicicletas[i].designacao,designacao)==0) //se forem iguais devolve 0, ja existe
         {
             pos = i;
-            break;  ///
         }
     }
     return pos;
@@ -136,37 +135,6 @@ int bicicletasDisponiveis(tipoBicicleta bicicletas[], int *contBicicleta)
     return ocupadas;
 }
 
-//contbicicleta,
-/*
-void inserirAvaria(tipoBicicleta bicicletas[], int contBicicleta)
-{
-    char designacao[MAXSTRING];
-    int pos = -1;
-    char avaria[MAX];
-
-    lerString("\nInserir ID da bicicleta:",designacao,MAXSTRING);
-
-    pos = procurarBicicleta(bicicletas,designacao,contBicicleta);
-
-    if(pos != -1)
-    {
-        if(strcmp(bicicletas[pos].estado,"avariada")==0 || strcmp(bicicletas[pos].estado,"emprestada")==0)
-        {
-            printf("\n\nEsta bicicleta encontra-se avariada ou emprestada.");
-        }
-        else
-        {
-            strcpy(bicicletas[pos].estado, "avariada");
-
-
-        }
-    }
-    else
-    {
-        printf("\n\nNao existe nenhuma bicicleta com essa designacao\n");
-    }
-}
-*/
 void registarAvariaReparacao(tipoBicicleta bicicletas[], int contBicicleta,int *bicicletasOcupadas)
 {
     char designacao[MAXSTRING];
